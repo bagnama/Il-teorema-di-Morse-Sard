@@ -1,0 +1,2627 @@
+\documentclass[12pt,a4paper]{report}
+\textwidth=450pt\oddsidemargin=0pt
+
+
+%\documentclass[a4paper,12pt,twoside,openright]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{pgfplots}
+\usepackage{newlfont}
+%\textwidth=450pt\oddsidemargin=0pt
+
+\usepackage{colortbl}
+
+\newcommand{\tcr}{\textcolor{red}}
+\newcommand{\tcb}{\textcolor{blue}}
+\newcommand{\tcg}{\textcolor{green}}
+
+
+%\theoremstyle{definition}
+\theoremstyle{plain}
+
+\newtheorem{thm}{Teorema}[chapter]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposizione}
+\newtheorem{cor}[thm]{Corollario}
+\newtheorem{defn}[thm]{Definizione}
+\newtheorem{obs}[thm]{Osservazione}
+\newtheorem{es}[thm]{Esempio}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{{\Large{\textsc{Alma Mater Studiorum $\cdot$ Universit\`a di
+Bologna}}}} \rule[0.1cm]{15.8cm}{0.1mm}
+\rule[0.5cm]{15.8cm}{0.6mm}
+{\small{\bf SCUOLA DI SCIENZE\\
+Corso di Laurea in Matematica }}
+\end{center}
+\vspace{15mm}
+\begin{center}
+{\LARGE{\bf Il Teorema di Morse-Sard}}\\
+% \vspace{3mm}
+%{\LARGE{\bf IL TEOREMA DI MORSE-SARD}}\\
+\end{center}
+\vspace{40mm}
+\par
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+{\large{\bf Relatore:\\
+Chiar.mo Prof.\\
+GIOVANNI CUPINI}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.47\textwidth}\raggedleft
+{\large{\bf Presentata da:\\
+MARCO BAGNARA}}
+\end{minipage}
+\vspace{20mm}
+\begin{center}
+{\large{\bf Sessione\\%inserire il numero della sessione in cui ci si laurea
+Anno Accademico 2021/2022}}
+\end{center}
+\end{titlepage}
+\tableofcontents 
+
+% 
+% 
+% \null\vspace{\stretch{1}}
+% \begin{flushright}
+% 	\textit{CITAZIONE/DEDICA}
+% \end{flushright}
+% \vspace{\stretch{2}}\null
+
+
+% 
+% \begin{abstract}
+% %SOMMARIO
+% \end{abstract}
+
+\chapter*{Introduzione}
+\addcontentsline{toc}{chapter}{Introduzione}
+
+
+%The case  $n=1$  was proven by Anthony P. Morse in 1939 \cite{Morse} and the general case by Arthur Sard in 1942 \cite{Sard}.
+
+
+Un punto critico di una funzione $f:U \rightarrow \mathbb{R}^n$ di classe $C^k$,  $k\ge 1$,    con $U$ aperto di $\mathbb{R}^m$,  è un punto in cui   la matrice Jacobiana di $f$ non ha rango massimo. 
+Il Teorema di Morse-Sard afferma che l'immagine dei punti critici è un insieme di misura di Lebesgue $n$-dimensionale nulla se sussiste la seguente relazione tra $k$, $m$ e $n$: \[k\ge \max\{m-n+1,1\}.\] 
+
+Tale risultato è ottimale, come attestato da un controesempio di   H. Whitney \cite{Whitney}.
+
+\medbreak
+
+
+
+
+
+Il  Teorema di Morse-Sard è così chiamato, in quanto A.P. Morse nel  1939 pubblica la versione per funzioni a valori reali in  \cite{Morse}, successivamente  generalizzata da A. Sard   nel 1942, a funzioni a valori vettoriali, vedi \cite{Sard}; a tale risultato ci si riferisce spesso con la dicitura di {\em Lemma di Sard}. 
+
+\medbreak
+
+
+ 
+Vi sono due casi di particolare rilevanza: il caso  $m=n$, e il caso $n=1$.
+
+
+\medbreak
+Nel primo caso, il Teorema di Morse-Sard può essere così enunciato:
+
+\medbreak
+{\em Sia $U$   un aperto di $\mathbb{R}^n$ e sia $f:U \rightarrow \mathbb{R}^n$ una funzione di classe $C^1(U)$.}
+
+{\em Allora ${\mathcal{L}^n}(f(crit(f)) = 0$ dove 
+\[crit(f) = \{ x \in U \, : \, \operatorname{det}Df(x)=0\}.\]}
+
+
+
+
+%Il primo è il Teorema di Morse-Sard per funzinoi $f \in C^1(\mathbb{R}^n, \mathbb{R}^n)$, che dice che se $f:U \rightarrow \mathbb{R}^n$ è una funzione di classe $C^1(U)$, dove $U$ è un aperto di $\mathbb{R}^n$, allora $\operatorname{vol}(f(crit(f)) = 0$ dove $crit(f) = \{ x \in U \, : \, Df(x) \text{ non ha rango massimo}\}$,  vedi Teorema \ref{t:MSnnC1}.
+
+Il secondo caso, riguardante funzioni a valori reali, è il Teorema di Morse, che possiamo  enunciare nel  modo seguente:
+
+\medbreak
+
+{\em Sia $U$  un aperto di $\mathbb{R}^m$ e sia  $f:U \rightarrow \mathbb{R}$ una funzione di classe $C^m(U)$.}
+
+{\em Allora ${\mathcal{L}^1}(f(crit(f)) = 0$ dove 
+\[crit(f) = \{ x \in U \, : \, \nabla f(x)=0\}.\]}
+ In particolare, da questo risultato si deduce che quasi ogni insieme  di livello di $f$ è una varietà di classe $C^m$. 
+
+\medbreak
+
+
+Il capitolo centrale di questa tesi è il Capitolo \ref{cap:2}, in cui diamo una dimostrazione del Teorema di Morse-Sard. Il caso $m<n$ non è difficile da trattare, ma decisamente più complicata è la trattazione del caso  $m\ge n$. Di questo caso, forniremo  la dimostrazione  di 
+Moreira e Ruas pubblicata nel 2009 in  \cite{Moreira}, la quale fa uso del  cosiddetto {\em Curve selection lemma}, si veda \cite{Milnor}. 
+
+
+
+
+%Il secondo è il Teorema di Morse-Sard per funzioni $f \in C^m(\mathbb{R}^m, \mathbb{R})$, e dice che se $f:U \rightarrow \mathbb{R}$ è una funzione di classe $C^m(U)$, dove $U$ è un aperto di $\mathbb{R}^m$, allora $\operatorname{vol}(f(C(f)) = 0$ dove $C(f) = \{ x \in U \, : \, Df(x) = 0\}$. Questo risultato prende il nome di Teorema di Morse, vedi Teorema \ref{t:morseRn}.
+
+
+
+
+%Questi Teoremi sono in realtà due casi particolari del più generale Teorema di Morse-Sard, si veda Teorema \ref{t:misf(c(f))=0}. Esso afferma che per $f \in C^{m-n+1}(U, \mathbb{R}^n)$, con $m \ge n$ e $U$ aperto di $\mathbb{R}^m$, allora $\operatorname{vol}(f(crit(f)))=0$ dove $crit(f) = \{ x \in U \, : \, Df(x) \text{ non ha rango massimo}\}$.
+
+ 
+
+%Alla fine del secondo capitolo tratteremo anche il Teorema di Morse-Sard nel caso di $f \in C^1(\mathbb{R}^m, \mathbb{R}^n)$ con $m < n$, si veda Teorema \ref{t:MSm<n2}.
+
+\medbreak
+
+Nel caso $m=n$, l'ipotesi $f\in C^1$ richiesta dal Teorema di Morse-Sard non è ottimale. Infatti, D.E.  Varberg nel 1966 in \cite{Varberg} dimostra che è possibile indebolire la regolarità di $f$ richiedendo la sola  differenziabilità. 
+  Di tale teorema forniamo la dimostrazione originale di Varberg, la quale  poggia anche su risultati di Flett \cite{flett}. Essa costituisce il terzo capitolo della tesi. 
+  
+  
+%Tale Teorema afferma che se $f:U \rightarrow \mathbb{R}^n$, con $U$ aperto di $\mathbb{R}^n$, è una funzione differenziabile su $U$, allora $\operatorname{vol}(f(crit(f)) = 0$, dove $crit(f) = \{ x \in U \, : \, Df(x) \text{ non ha rango massimo}\}$. Di questo risultato, forniamo la dimostrazione originale, la quale poggia anche su risultati di Flett \cite{flett}.
+
+\medbreak
+A concludere l'elaborato è una significativa  applicazione del Teorema di Morse-Sard: la formula di coarea per  funzioni sommabili a valori reali.   Mettiamo qui in evidenza il rilevante caso particolare:  se   $f\in L^1(\mathbb{R}^n)$, allora 
+\[
+\int_{\mathbb{R}^n} f(x)\, dx =\int_{0}^{\infty}\left(\int_{\partial B(0,t)}f(x)\, d\sigma(x)
+\right)dt
+\]
+dove $B(0,t)$ sta a indicare la palla di $\mathbb{R}^n$ centrata nell'origine e di raggio $t$. 
+
+%I teorema importante:
+%
+%CASO 1
+%
+%$f\in C^1(\mathbb{R}^n,\mathbb{R}^n)$ 
+%
+%dimostrato in .... da ...
+%
+%
+%II teorema importante: teorema di Morse (T.2.8 per ora)
+%
+%CASO 2 
+%
+%$f\in C^m(\mathbb{R}^m,\mathbb{R})$ 
+%
+%dimostrato in .... da ...
+%
+
+
+%Questi rientrano in una formulazione più generale: teorema Morse Sard:
+%
+%caso generale: 
+%
+%$f\in C^{m-n+1}(\mathbb{R}^m,\mathbb{R}^n)$, $m\ge n$, vale la formula
+%SCRIVERE \[ TESI vol(f(crit(f))=0\]
+%
+%Il fatto che sia $C^{m-n+1}$ è ottimale. Vedi [citare] per i controesempi. 
+
+
+%
+%Noi  presentiamo  qui la  dimostrazione di  TESI sotto l'ipotesi ottimale $f\in C^{m-n+1}$ presentata in Moreira-Ruis .... che fa uso del cosiddetto {\em Curve selection lemma}, si veda  Milnor.
+%
+%
+%
+%Poi: IL CASO 2 si può migliorare, sostituendo $C^1$ con differenziabile: Varberg. Questo è discusso nel (sezione) o capitolo.
+%
+%
+%L'ultimo capito della tesi è dedicato a una importante applicazione del Lemma di Sard e riguarda il caso di funzioni 
+%
+%
+%$f\in C^{\infty}(\mathbb{R}^m,\mathbb{R})$ 
+%Un caso significativo è il seguente [coordinate sferiche, esempio 4.6, per ora] che dice...
+
+
+
+
+%\newtheorem{notazo}[thm]{Definizione}
+\chapter{Preliminari}
+\label{cap:1}
+
+
+In questo capitolo introduciamo alcune notazioni e raccogliamo alcuni risultati preliminari che saranno  utili per la dimostrazione del Teorema di Morse-Sard, argomento del successivo capitolo.
+
+\medbreak
+
+
+Sia $S \subset \mathbb{R}^n$. Indichiamo la chiusura di S con $\bar{S}$ e denotiamo $S'$ il derivato di $S$, ossia l'insieme dei punti di accumulazione di $S$.
+
+
+\medbreak
+ 
+Inoltre, se $S$ è un insieme misurabile secondo Lebesgue di $\mathbb{R}^n$, 
+scriveremo $\operatorname{vol}(S)$ per indicarne la sua misura di Lebesgue.
+
+
+\medbreak
+Le palle di centro $x$ e raggio $r$ verranno denotate $B(x,r)$ e  denoteremo con $\omega_n$ la misura di Lebesgue della palla unitaria in $\mathbb{R}^n$.
+ 
+
+\section{Formula di Taylor}
+
+Ricordiamo qui le formule di Taylor con il resto di Lagrange e di Peano per funzioni 
+di più variabili.
+
+
+
+
+\begin{thm} [Formula di Taylor con il Resto di Lagrange] \label{t:Lag}
+
+Sia $f:A  \rightarrow \mathbb{R} $, A aperto di $ \mathbb{R}^n $ e $ f \in C^k $. Siano $x$, $\bar{x} \in A, x \neq \bar{x}$, tali che $[x, \bar{x}] \subseteq A$.
+Allora $\exists \, \xi \in ]\bar{x}, x[$, tale che:
+
+\[ f(x) = \sum_{\| \alpha \| \leq k-1} \frac{D^\alpha f(\bar{x})}{\alpha !} (x-\bar{x})^\alpha + \sum_{\| \alpha \| = k} \frac{D^\alpha f(\xi)}{\alpha !}(x-\bar{x})^\alpha \]
+
+\end {thm}
+
+
+\begin{thm} [Formula di Taylor con il Resto di Peano] \label{t:Peano}
+
+Sia $f:A \rightarrow \mathbb{R}$, A aperto di $ \mathbb{R}^n $ e $ f \in C^k(A) $. Siano $x, \, \bar{x} \in A, x \neq \bar{x}$, tali che $[x, \bar{x}] \subseteq A$.
+Allora:
+
+\[ 
+f(x) = \sum_{| \alpha | \leq k} \frac{D^\alpha f(\bar{x})}{\alpha !} (x-\bar{x})^\alpha + o(\| x-\bar{x} \| ^{k}) 
+\] 
+per $x \rightarrow \bar{x}$.
+\end {thm}
+
+
+
+\begin{proof}
+
+Per il Teorema \ref{t:Lag}, $\exists \, \xi \in ]\bar{x}, x[$, tale che
+\[ 
+f(x) = \sum_{\| \alpha \| \leq k-1} \frac{D^\alpha f(\bar{x})}{\alpha !} (x-\bar{x})^\alpha + \sum_{\| \alpha \| = k} \frac{D^\alpha f(\xi)}{\alpha !}(x-\bar{x})^\alpha .
+\]
+
+\noindent
+Per dimostrare il Teorema dobbiamo mostrare che, per $x \rightarrow \bar{x}$
+\[ 
+\sum_{\| \alpha \| = k} \frac{D^\alpha f(\xi)}{\alpha !}(x-\bar{x})^\alpha  = \sum_{\| \alpha \| = k} \frac{D^\alpha f(\bar{x})}{\alpha !} (x-\bar{x})^\alpha + o(\| x-\bar{x} \| ^{k}),
+\] 
+cioè
+\[ 
+\lim_{x \to \bar{x}} \frac{\sum_{\| \alpha \| = k} (D^\alpha f(\xi) -D^\alpha f(\bar{x})) (x-\bar{x})^\alpha}{\| x-\bar{x} \| ^k} =0.
+\]
+
+Utilizzando le proprietà della norma si ha
+\begin{equation} \label{e:pValD}
+\| \sum_{\| \alpha \| = k} (D^\alpha f(\xi) -D^\alpha f(\bar{x})) (x-\bar{x})^\alpha \| \leq \sum_{\| \alpha \| = k} \| D^\alpha f(\xi) -D^\alpha f(\bar{x})\| \| (x-\bar{x})^\alpha \|
+\end{equation}
+e, per le proprietà dei multiindici, si ha che
+\begin{equation} \label{e:multiind}
+\| (x- \bar{x})^\alpha \| \le \| x - \bar{x} \| ^ {|\alpha|}.
+\end{equation}
+Quindi da \eqref{e:pValD} e \eqref{e:multiind} si ottiene
+\begin{equation} \label{xalpha<xk}
+\| \sum_{\| \alpha \| = k} (D^\alpha f(\xi) -D^\alpha f(\bar{x})) (x-\bar{x})^\alpha \| \leq \sum_{\| \alpha \| = k} \| D^\alpha f(\xi) -D^\alpha f(\bar{x})\| \| x-\bar{x} \| ^k.
+\end{equation}
+
+\noindent
+Per \eqref{xalpha<xk} vale
+\begin{align*} 
+&\lim_{x \to \bar{x}} \left \| \frac{\sum_{\| \alpha \| = k} (D^\alpha f(\xi) -D^\alpha f(\bar{x})) (x-\bar{x})^\alpha}{\| x-\bar{x} \| ^k} \right \| \leq  \\
+&\leq \lim_{x \to \bar{x}} \frac{\sum_{\| \alpha \| = k} \| D^\alpha f(\xi) -D^\alpha f(\bar{x})\| \| x-\bar{x} \| ^k}{\| x-\bar{x} \| ^k} \\
+& = \lim_{x \to \bar{x}} \sum_{\| \alpha \| = k}\| (D^\alpha f(\xi) -D^\alpha f(\bar{x})) \|,
+\end{align*}
+da cui deduciamo che 
+\begin{equation} \label{limDalpha} 
+\lim_{x \to \bar{x}} \left \| \frac{\sum_{\| \alpha \| = k} (D^\alpha f(\xi) -D^\alpha f(\bar{x})) (x-\bar{x})^\alpha}{\| x-\bar{x} \| ^k} \right \| \leq \lim_{x \to \bar{x}} \sum_{\| \alpha \| = k}\| D^\alpha f(\xi) -D^\alpha f(\bar{x}) \|.
+\end{equation}
+
+\noindent
+$f$ è di classe $C^k$, quindi tutte le sue derivate fino a ordine $k$ sono continue in $\bar{x}$, inoltre dal fatto che $\xi \in ]x, \bar{x}[$ deduciamo che
+
+\begin{equation} \label{limxbarxi}
+\lim_{x \to \bar{x}} \xi = \bar{x}.
+\end{equation}
+
+Vale inoltre, per le proprietà della norma che, se $\alpha$ è tale che $|\alpha| = k$,
+\begin{equation} \label{normDalphasqrt}
+\| D^\alpha f(\xi) -D^\alpha f(\bar{x}) \| \leq \sqrt{\sum_{i_1, i_2, i_3,...,i_k = 1}^n  \left (f_{x_{i_1},...,x_{i_k}}(\xi) - f_{x_{i_1},...,x_{i_k}}(\bar{x}) \right)^2}.
+\end{equation}
+
+Otteniamo quindi da \eqref{limxbarxi} e \eqref{normDalphasqrt}
+\begin{align*}
+&\lim_{x \to \bar{x}} \sum_{\| \alpha \| = k}\| D^\alpha f(\xi) -D^\alpha f(\bar{x}) \| \leq \\ & \leq \lim_{x \to \bar{x}} \sqrt{\sum_{i_1, i_2, i_3,...,i_k = 1}^n  \left(f_{x_{i_1},...,x_{i_k}}(\xi) - f_{x_{i_1},...,x_{i_k}}(\bar{x}) \right)^2} =0,
+\end{align*}
+e da \eqref{limDalpha}
+\[
+\lim_{x \to \bar{x}} \left \| \frac{\sum_{\| \alpha \| = k} (D^\alpha f(\xi) -D^\alpha f(\bar{x})) (x-\bar{x})^\alpha}{\| x-\bar{x} \| ^k} \right \| = 0.
+\]
+\end{proof}
+ 
+
+
+
+\section{Un teorema di ricoprimento}
+Il seguente è una versione di teorema di ricoprimento di Vitali, presente in \cite{Moreira}.
+
+
+\begin{lem} \label{t:vol3m}
+
+Sia $U \subset \mathbb{R}^m$ aperto di misura $a < +\infty$ e sia $X \subset U$ tale che per ogni $x \in X$ esiste $B(x, \delta_x) \subset U$. Allora esiste un sottoinsieme finito o numerabile $\{x_i\}_{i \in I} \subset X$ tale che $X \subset \cup_{i \in I}B(x_i, \delta_{x_i})$ e $\sum_{i \in I}vol(B(x_i, \delta_{x_i})) \le 3^m a $
+
+\end{lem}
+
+\begin{proof}
+Denotiamo  $\omega_m$ la  misura della palla unitaria in $\mathbb{R}^m$. 
+
+Sia $B(x, \delta_x) \subset U$. Essendo  $\operatorname{vol}(U)=a$, si ha 
+\begin{equation}\label{e:volpalla<a}
+\operatorname{vol}(B(x, \delta_x)) = 
+\omega_m \delta_x ^m \le a,
+\end{equation}
+quindi
+\[
+\sup \{ \delta>0 \,:\, \exists x \in X, \delta_x = \delta \} \le \sqrt[m]{\frac{a}{\omega_m}} < +\infty.
+\]
+
+Costruiamo $\{x_i\}_{i \in I}$ mediante un ragionamento iterativo. 
+
+
+Sia $x_1 \in X$ tale che:
+\[ 
+\delta_{x_1} > \frac{1}{2} \sup \{ \delta>0 \,:\, \exists x \in X, \delta_x = \delta \} 
+\] 
+possono verificarsi due casi:\\
+(i1) $\forall \, x \in X \setminus \{x_1\}$, $\displaystyle B(x,  \frac{\delta_x}{3}) \cap B(x_1, \frac{\delta_{x_1}}{3}) \neq \emptyset$. \\
+(ii1) $\exists \, x \in X \setminus \{x_1\}$ tale che $ \displaystyle B(x, \frac{\delta_x}{3}) \cap B(x_1, \delta_{x_1}) = \emptyset$. \\
+
+\noindent
+Caso (i1).\\
+In questo caso otteniamo che per ogni $x \in X \setminus \{x_1\}$
+\[
+\| x - x_1 \| < \frac{\delta_x}{3} + \frac{\delta_{x_1}}{3} \le \frac{\sup \{ \delta > 0 \,:\, \exists y \in X, \delta_y = \delta \}}{3} + \frac{\delta_{x_1}}{3} < \frac{2 \delta_{x_1}}{3} + \frac{\delta_{x_1}}{3} = \delta_{x_1},
+\]
+e quindi \[
+X \subset B(x_1, \delta_{x_1}).
+\]
+Inoltre, per \eqref{e:volpalla<a}, 
+\[\operatorname{vol}(B(x_1, \delta_{x_1}))\le a<3^ma.\]
+
+Ciò dà la tesi. \\
+
+\noindent
+Caso (ii1).\\
+In questo caso $\exists \, x_2 \in X \setminus \{ x_1 \}$ tale che:
+
+\begin{equation} \label{e:inter-bis}
+B(x_2, \frac{\delta_{x_2}}{3}) \cap B(x_1, \frac{\delta_{x_1}}{3}) = \emptyset
+\end{equation}
+
+e
+\[
+\delta_{x_2} > \frac{1}{2} \sup \{ \delta>0 \,:\, \exists x \in X, \delta_x = \delta \text{ e }B(x, \frac{\delta_x}{3}) \cap B(x_1, \frac{\delta_{x_1}}{3}) = \emptyset \}.
+\]
+Dato che le due palle sono disgiunte, si ha che
+\[
+\operatorname{vol}(B(x_1, \frac{\delta_{x_1}}{3})) + \operatorname{vol}(B(x_2, \frac{\delta_{x_2}}{3})) = \operatorname{vol}(B(x_1, \frac{\delta_{x_1}}{3})\cup B(x_2, \frac{\delta_{x_2}}{3})) \le \operatorname{vol}(U) = a.
+\]
+Osserviamo che 
+$\operatorname{vol}(B(x, r)) = 3^m \operatorname{vol}(B(x, \frac{r}{3}))$. Dunque 
+
+\begin{equation} \label{e:volpallax2}
+\operatorname{vol}(B(x_1, \delta_{x_1})) + \operatorname{vol}(B(x_2, \delta_{x_2})) \le  3^m (\operatorname{vol}(B(x_1, \frac{\delta_{x_1}}{3})) + \operatorname{vol}(B(x_2, \frac{\delta_{x_2}}{3}))) \le 3^m a.
+\end{equation}
+
+Si procede considerando i seguenti  due possibili casi. 
+
+\noindent
+(i2) $\displaystyle \forall \, x \in X \setminus \{x_1, x_2 \}, B(x, \frac{\delta_x}{3}) \cap (\displaystyle \
+\cup_{i=1}^2 B(x_i, \frac{\delta_{x_i}}{3})) \neq \emptyset$.\\
+
+
+\noindent
+(ii2) $\exists \, x \in X \setminus \{x_1, x_2 \}$ tale che $B(x, \frac{\delta_x}{3}) \cap (\cup_{i=1}^2 B(x_i, \frac{\delta_{x_i}}{3})) = \emptyset$.
+
+
+\noindent
+Nel primo caso, ossia  (i2), abbiamo che se  $x\in X \setminus \{x_1, x_2 \}$ allora o 
+\begin{equation}\label{e:stepII-1}B(x, \frac{\delta_x}{3}) \cap   B(x_1, \frac{\delta_{x_1}}{3})\ne \emptyset
+\end{equation}
+oppure 
+\begin{equation}\label{e:stepII-2}
+ \left\{\begin{array}{l}
+B(x, \frac{\delta_x}{3}) \cap   B(x_1, \frac{\delta_{x_1}}{3})=\emptyset \\ \\ B(x, \frac{\delta_x}{3}) \cap   B(x_2, \frac{\delta_{x_2}}{3})\ne \emptyset
+\end{array}\right.
+\end{equation}
+
+
+Nel caso \eqref{e:stepII-1}, si ha 
+\begin{align*}
+\|x-x_1\|&<\frac{\delta_x}{3}+\frac{\delta_{x_1}}{3}
+<\frac{1}{3}\sup\{\delta>0\,:\,\exists y\in X, \delta_y=\delta\}
++\frac{\delta_{x_1}}{3}
+\\ &<\frac{2}{3}\delta_{x_1}+\frac{\delta_{x_1}}{3}=\delta_{x_1}.
+\end{align*}
+Quindi 
+\[
+x\in B(x_1,  \delta_{x_1})\subseteq B(x_1, \delta_{x_1}) \cup B(x_2, \delta_{x_2}).
+\]
+
+Nel caso \eqref{e:stepII-2}, si ha 
+\begin{align*}
+\| x - x_2 \| &< \frac{\delta_x}{3} + \frac{\delta_{x_2}}{3}
+\\&< \frac{1}{3} \sup \{ \delta >0 \, : \, \exists y \in X, \delta_y = \delta, B(y, \frac{\delta_y}{3})\cap B(x_1, \frac{\delta_{x_1}}{3}) =\emptyset \} +\frac{\delta_{x_2}}{3} 
+\\&< \frac{2 \delta_{x_2}}{3} + \frac{\delta_{x_2}}{3} = \delta_{x_2}.
+\end{align*}
+Quindi
+\[
+x \in B(x_2, \delta_{x_2}) \subseteq B(x_1, \delta_{x_1}) \cup B(x_2, \delta_{x_2}).
+\]
+
+Da (i2) segue così
+\[
+X \subset B(x_1, \delta_{x_1}) \cup B(x_2, \delta_{x_2}),
+\]
+e da \eqref{e:volpallax2} 
+\[
+\sum_{i=1}^2 \operatorname{vol}(B(x_i, \delta_{x_i})) < 3^m a.
+\]
+
+\noindent
+Consideriamo (ii2), cioè \\
+$\exists \, x \in X \setminus \{x_1, x_2 \}$ tale che $B(x, \frac{\delta_x}{3}) \cap (\cup_{i=1}^2 B(x_i, \frac{\delta_{x_i}}{3})) = \emptyset$.\\
+
+\noindent
+In questo caso esiste  $x_3 \in X \setminus \{ x_1 , x_2 \}$ tale che
+\begin{equation} \label{e:Bx3xi}
+B(x_3, \frac{\delta_{x_3}}{3}) \cap (\cup_{i=1}^2 B(x_i, \frac{\delta_{x_i}}{3})) = \emptyset
+\end{equation}
+e
+\[
+\delta_{x_3} > \frac{1}{2} \sup \{ \delta >0 \,:\, \exists y \in X, \delta_y = \delta , B(y, \frac{\delta_y}{3}) \cap (\cup_{i=1}^2 B(x_i, \frac{\delta_{x_i}}{3})) = \emptyset \}.
+\]
+
+Abbiamo quindi $x_1, x_2, x_3 \in X$ e, per \eqref{e:inter-bis} e \eqref{e:Bx3xi}, le palle $\displaystyle B(x_1, \frac{\delta_{x_1}}{3})$, 
+$B(x_2, \frac{\delta_{x_2}}{3})$, $B(x_3, \frac{\delta_{x_3}}{3})$ sono a due a due disgiunte.
+Quindi:
+\[
+\sum_{i=1}^3 \operatorname{vol}(B(x_i, \frac{\delta_{x_i}}{3})) = \operatorname{vol}( \cup_{i=1}^3 B(x_i, \frac{\delta_{x_i}}{3})) \le \operatorname{vol}(U) = a,
+\]
+\noindent
+da cui
+\[
+\sum_{i=1}^3 \operatorname{vol}(B(x_i, \delta_{x_i})) = 3^m \sum_{i=1}^3 \operatorname{vol}(B(x_i, \frac{\delta_{x_i}}{3})) \le 3^m a.
+\]
+
+
+Iterando il procedimento si trova un insieme finito (se si verifica ad un certo punto un caso (i)) o infinito (nel caso non si verifichi mai un caso (i)) di indici $I$ tale che
+\[
+\{x_i\}_{i \in I} \subset X \text{ e } \sum_{i \in I} \operatorname{vol}(B(x_i, \delta_{x_i})) \le 3^m a.
+\]
+
+Mostriamo che $I$ è al più numerabile. Sia:
+\[E_1 = \{i \in I \,:\, \delta_{x_i} \ge 1 \}\]
+\[E_2 = \{i \in I \,:\, \frac{1}{2} \le \delta_{x_i} < 1 \}\]
+in generale
+\[E_k = \left \{i \in I \,:\, \frac{1}{2^k} \le \delta_{x_i} < \frac{1}{2^{k-1}} \right \}.\]
+
+Quindi si ha che $\operatorname{card}(E_k)$ è finita per ogni $k \in \mathbb{N}$, infatti
+\[
+a \ge \sum_{i \in E_k} \operatorname{vol}(B(x_i, \frac{\delta_{x_i}}{3})) = \sum_{i \in E_k} \omega_m ( \frac{\delta_{x_i}}{3} )^m \ge \operatorname{card}(E_k) \omega_m (\frac{1}{2^k})^m
+\]
+e cioè
+\begin{equation} \label{e:cEkinf}
+\operatorname{card}(E_k) \le \frac{a (2^k)^m}{\omega_m} < \infty.
+\end{equation}
+
+Osserviamo inoltre che 
+\begin{equation} \label{e:I=Ek}
+I = \cup_{k \in \mathbb{N}} E_k.
+\end{equation}
+Da \eqref{e:cEkinf} e \eqref{e:I=Ek} segue che 
+\[
+\operatorname{card}(I) = \operatorname{card}\left( \cup_{k \in \mathbb{N}} E_k \right) = \sum_{k \in \mathbb{N}} \operatorname{card}(E_k) \le \sum_{k \in \mathbb{N}} \frac{a (2^k)^m}{\omega_m}< \infty
+\]
+e quindi la cardinalità di $I$ è al più numerabile.
+\end{proof}
+
+
+\section{Sezioni di un insieme compatto}
+
+Per la dimostrazione del  Teorema di Morse-Sard \ref{t:misf(c(f))=0}, avremo bisogno del seguente risultato di teoria della misura. 
+ 
+
+
+\begin{lem} \label{t:misK0}
+
+Sia $K \subset \mathbb{R}^n = \mathbb{R}^p \times \mathbb{R}^{n-p}$ un compatto tale che per ogni $x \in \mathbb{R}^p$, l'insieme \[K_x := \{y \in \mathbb{R}^{n-p} \, : \, (x,y)\in K\}\] ha misura zero in $\mathbb{R}^{n-p}$. Allora $K$ ha misura zero in $\mathbb{R}^n$.
+
+\end{lem}
+
+
+\begin{proof}
+
+Siccome $K$ è compatto, allora esiste $R>0$ tale che $K \subset B(0,R) \times \mathbb{R}^{n-p}$, dove $B(0,R)$ è la palla di centro $0$ e raggio $R$ in $\mathbb{R}^p$. Per ogni $x \in B(0,R)$, $K_x$ ha misura zero.
+Da ciò segue che per ogni $\epsilon >0$ esiste una famiglia di palle $\{B(y_i, r_i) \}_{i \in I}$ in $ \mathbb{R}^{n-p}$ tale che
+\begin{equation} \label{e:KxByi}
+K_x \subset \cup_{i\in I} B(y_i, r_i) \text{ e } \sum_{i\in I}\operatorname{vol}(B(y_i, r_i))< \epsilon.
+\end{equation}
+
+Essendo $K$ compatto,  si ha  
+\begin{equation} \label{e:KxByiBis}
+\exists \, \delta_x>0 \text{ tale che }K \cap (B(x, \delta_x) \times \mathbb{R}^{n-p}) \subset \cup_{i \in I} (B(x, \delta_x) \times B(y_i, r_i)).
+\end{equation}
+Infatti, se così non fosse, avremmo che
+\[
+\forall \, \delta>0,  \exists \, (u_\delta, v_\delta) \in K \cap (B(x, \delta) \times \mathbb{R}^{n-p}) \setminus (\cup_{i \in I} (B(x, \delta) \times B(y_i, r_i)).
+\]
+Scegliendo $\displaystyle \delta = \frac{1}{n}$ si avrebbe che
+\[
+\forall \, n \in \mathbb{N}, \exists \, (u_n, v_n) \in K \cap (B(x, \frac{1}{n}) \times \mathbb{R}^{n-p}) \setminus (\cup_{i \in I}(B(x, \frac{1}{n}) \times B(y_i, r_i))).
+\]
+
+Abbiamo quindi una successione $(u_n, v_n)_{n \in \mathbb{N}} \subset K$ tale che 
+\begin{equation} \label{e:u_nBx}
+\forall \, n \in \mathbb{N} \quad u_n \in B(x, \frac{1}{n})
+\end{equation}
+e tale che 
+\begin{equation} \label{e:u_nv_nBx}
+\displaystyle (u_n, v_n) \notin \cup_{i \in I}(B(x, \frac{1}{n}) \times B(y_i, r_i)).
+\end{equation}
+Osserviamo ora che da \eqref{e:u_nBx} segue che
+\begin{equation} \label{e:limu_nx}
+\lim_{n \to \infty} u_n = x
+\end{equation}
+e da \eqref{e:u_nv_nBx}
+\begin{equation} \label{e:v_nByi}
+v_n \notin \cup_{i \in I}B(y_i, r_i).
+\end{equation}
+
+Siccome in $\mathbb{R}^n$ un insieme è compatto se e solo se è compatto per successioni, si ha che esiste $(u,v) \in K$ ed esiste $(u_{h_n}, v_{h_n})_{n \in \mathbb{N}} \subset K$ sottosuccessione di $(u_n, v_n)_{n \in \mathbb{N}}$ tale che
+\begin{equation} \label{e:limuhnvhnuv}
+\lim_{n \to +\infty} (u_{h_n}, v_{h_n}) = (u,v) \in K.
+\end{equation}
+
+Da \eqref{e:limu_nx} e tenendo conto del fatto che $(u_{h_n})_{n \in \mathbb{N}}$ è sottosuccessione di $(u_n)_{n \in \mathbb{N}}$ si ha
+\[
+\lim_{n \to +\infty} u_{h_n} = x
+\]
+e quindi, per \eqref{e:limuhnvhnuv},
+\begin{equation} \label{e:u=x}
+u = x.
+\end{equation}
+Da \eqref{e:v_nByi} segue che
+\[
+v_{h_n} \in \mathbb{R}^{n-p} \setminus (\cup_{i \in I} B(y_i, r_i)).
+\]
+Dato che $\mathbb{R}^{n-p} \setminus \cup_{i \in I} B(x_i, r_i)$ è un chiuso e $v_{h_n}$ converge a $v$, per la caratterizzazione per successioni di un insieme chiuso, si ha che
+\[
+v \in \mathbb{R}^{n-p} \setminus (\cup_{i \in I} B(y_i, r_i))
+\]
+cioè
+\begin{equation} \label{e:vBxi}
+v \notin \cup_{i \in I} B(y_i, r_i).
+\end{equation}
+
+Da \eqref{e:limuhnvhnuv} e \eqref{e:u=x} segue che $v \in K_x$ e da \eqref{e:KxByi} si ha
+\[
+v \in \cup_{i \in I} B(y_i, r_i)
+\]
+e ciò è in contraddizione con \eqref{e:vBxi}. Abbiamo così dimostrato \eqref{e:KxByiBis}.
+
+Dal Lemma \ref{t:vol3m} con $U = X = B(0, R)$ posso ricoprire $X$ con una famiglia finita o numerabile di palle $\{ B(x^{(j)}; \delta^{(j)})\}_{j \in J}$ di $\mathbb{R}^p$ tale che
+\begin{equation} \label{e:vol3mB}
+\sum_{j \in J} \operatorname{vol}(B(x^{(j)}, \delta^{(j)})) < 3^p \operatorname{vol}(B(0,R)).
+\end{equation}
+
+Per \eqref{e:KxByiBis}, possiamo definire un ricoprimento aperto di $K$ $\{B(x^{(j)}, \delta^{(j)}) \times B(y_i^{(j)}, r_i^{(j)})\}_{i,j \in I,J}$.
+Da \eqref{e:KxByi}, \eqref{e:vol3mB} e dal fatto che $\operatorname{vol}(A \times B) = \operatorname{vol}(A)\operatorname{vol}(B)$ si ha
+\[
+\sum_{i,j} \operatorname{vol}(B(x^{(j)}, \delta^{(j)}) \times B(y_i^{(j)}, r_i^{(j)})) < \epsilon \sum_{j} \operatorname{vol}(B(x^{(j)}, \delta^{(j)})) \le \epsilon 3^p \operatorname{vol}(B(0,R)).
+\]
+Quindi per ogni $\epsilon >0$
+\[
+\mu(K) < \epsilon 3^n \operatorname{vol}(B(0,R)).
+\]
+Per l'arbitrarietà di $\epsilon$ segue che $K$ ha misura zero.
+\end{proof}
+
+
+
+
+
+
+\chapter{Teorema di Morse-Sard}
+\label{cap:2}
+
+
+Questo è il capitolo  centrale della tesi. Qui infatti enunciamo e dimostriamo il  Teorema di Morse-Sard nella sua formulazione ottimale. 
+
+%
+%Introduciamo qui le seguenti importanti notazioni.
+ %
+%Siano $m,n\in \mathbb{N}$, $n,m\ge 1$. Sia 
+%$U$ un aperto di $\mathbb{R}^m$ e $f:U \rightarrow \mathbb{R}^n$ una funzione. Definiamo
+%\[
+%crit(f) := \{ x \in U \, | \, \text{ $\operatorname{rg}Df(x)$ non è massimo}\}
+%\]
+%e
+%\[
+%C(f) := \{x \in U \, | \, Df(x) = 0 \}.
+%\] 
+%
+%Ovviamente, se $f$ è a valori reali, ossia $n=1$, allora  $crit(f) = C(f)$.
+\medbreak
+
+Il Teorema di Morse-Sard (Teorema \ref{t:misf(c(f))=0}) afferma che, se $f:U\rightarrow \mathbb{R}^n$, con $U$ aperto di $\mathbb{R}^m$, $m\ge n$, è  una funzione di classe $C^{m-n+1}$, allora 
+$f(crit(f))$ ha misura zero in $\mathbb{R}^n$.
+
+Qui $crit(f)$ denota l'insieme \[
+crit(f) := \{ x \in U \, | \, \text{ $\operatorname{rg}Df(x)$ non è massimo}\}
+\]
+Ovviamente, se $n=1$,   tale insieme coincide con 
+\[
+C(f) := \{x \in U \, | \, \nabla f(x) = 0 \}.
+\] 
+
+
+Di tale teorema diamo la dimostrazione di Moreira e Ruas in \cite{Moreira}, la quale 
+fa uso del cosiddetto ``Curve selection lemma''.
+
+
+
+
+
+
+
+
+\section{Il ``Curve selection lemma''} 
+
+
+
+\begin{defn}[Insieme algebrico]
+Sia $V \subset \mathbb{R}^n$. Diciamo che $V$ è un insieme algebrico se è il luogo degli zeri di un numero  finito di polinomi.
+\end{defn}
+
+
+
+\begin{defn}[Insieme semialgebrico]
+Sia $U \subset \mathbb{R}^n$ un aperto definito da un numero finito di disequazioni polinomiali, ossia 
+\[U = \{x \in \mathbb{R}^n\,:\, g_1(x) > 0,..., g_h(x) > 0\}
+\]
+con $g_i$ polinomio per ogni $i\in \{1,\ldots,h\}$, 
+ e sia $V\subset \mathbb{R}^n$ un insieme algebrico. Allora   $U \cap V$ è detto  insieme semialgebrico.
+\end{defn}
+
+Vale il seguente risultato.
+\begin{lem}[Curve selection lemma] \label{t:curve}
+Sia $U \subset \mathbb{R}^m$ un aperto definito da un numero finito di disequazioni polinomiali e $V\subset \mathbb{R}^m$ un insieme algebrico.
+
+Se  $0 \in \overline{U \cap V}$, allora esiste una curva reale analitica $\gamma: [0,\epsilon[ \rightarrow \mathbb{R}^m$, tale che $\gamma(0)=0$, e $\gamma(t) \in U \cap V$ per ogni $t>0$.
+\end{lem}
+
+
+Tale risultato, dovuto a Milnor,  ha una dimostrazione molto articolata, per la quale rimandiamo al capitolo 3 del libro \cite{Milnor}.
+
+
+
+
+
+
+
+Il seguente risultato è un'applicazione del Curve Selection Lemma \ref{t:curve} che servirà nella dimostrazione del Lemma \ref{t:lemlim}.
+
+\begin{prop} \label{t:f<CxDf}
+Sia $U \subseteq \mathbb{R}^m$ un aperto, $0 \in U$. Sia $f:U \rightarrow \mathbb{R}$ una funzione polinomiale tale che $f(0)=0$. 
+Se $C\in \mathbb{R}$, $C > 1$, allora esiste un intorno $W$ di $0$ tale che: 
+\[ 
+|f(x)| \le C\|x\|\|Df(x)\|\quad  \forall x \in W. 
+\]
+\end{prop}
+
+\begin{proof}
+Definiamo: 
+\[
+S := \{ x \in U\,:\, C \|x\|  \|Df(x)\| < |f(x)| \}.
+\]
+Se $S = \emptyset$ allora $W = U$. \\
+Sia $S \neq \emptyset$. Se $0 \notin S'$, dove ricordiamo che $S'$ denota l'insieme dei punti di accumulazione di $S$,
+ allora 
+\[
+\exists \, r>0 \, : \, B(0,r) \subset U
+\]
+e 
+\[
+|f(x)| \le C \|x\| \|Df(x)\|, \quad \forall \, x \in B(0,r);
+\]
+in tal caso $W = B(0,r)$. \\
+Resta da considerare il caso $S \neq \emptyset$ e $0 \in S'$.
+Dato che $f$ è una funzione polinomiale, anche $Df$ è una funzione polinomiale, quindi l'insieme $S$ è semialgebrico.
+
+Quindi per il Lemma di selezione della curva, vedi Lemma \ref{t:curve}, si ha che
+\[
+\exists \, \epsilon > 0 \text{ e } \exists \, \gamma :[0, \epsilon[ \rightarrow \mathbb{R}^m,
+\]
+tale che $\gamma \in C^1$, $\gamma(0)=0$, $\gamma(]0,\epsilon[) \subseteq S$  e 
+\begin{equation}\label{e:gamma} \|\gamma'(t)\| = 1, \quad \forall \, t \in [0,\epsilon[.
+\end{equation}
+
+\noindent
+Pertanto
+\[
+C\| \gamma(t) \| \| Df (\gamma(t)) \| < | f(\gamma(t)) |.
+\]
+
+Definiamo la funzione 
+$\Phi:[0,\epsilon[  \rightarrow \mathbb{R}$,  
+$\Phi(t) = (f\circ \gamma)(t)$. 
+
+\noindent 
+Allora vale
+\begin{equation} \label{e:gammaDfgamma}
+C\| \gamma(t) \| \| Df(\gamma(t)) \| < | \Phi(t) | \quad \forall \, t \in [0, \epsilon[
+\end{equation}
+e si ottiene da \eqref{e:gamma} e \eqref{e:gammaDfgamma} che
+\begin{align*}C\| \gamma(t) \|
+| t | | \Phi'(t) | &= C\| \gamma(t) \|| t | |(f \circ \gamma)'(t) |  
+\\
+&
+\le 
+ C\| \gamma(t) \| | t | \| Df(\gamma(t)) \| \| \gamma'(t) \|
+\le | t |  | \Phi(t) | \| \gamma'(t) \|
+\\ &
+= | t | | f(\gamma(t)) |, \quad \forall t \, \in [0, \epsilon[.
+\end{align*}
+Abbiamo così dedotto che 
+\begin{equation}\label{e:tPhi<tfgamma} C\| \gamma(t) \|
+| t | | \Phi'(t) | \le  | t  | | f(\gamma(t))| \quad 
+\forall t \, \in [0, \epsilon[.
+\end{equation}
+
+Applicando lo sviluppo di Taylor centrato in $0$ con il resto di Lagrange alla funzione  $\gamma$  si ha 
+\[
+\gamma(t) = \gamma(0) + \gamma'(\tau)t = \gamma'(\tau)t, 
+\]
+con $\tau \in [0,t]$.
+
+Tenendo conto di \eqref{e:gamma} e  che $\gamma(0)=0$ si ha  \[
+\lim_{t \to 0^+}  \left\| \frac{\gamma(t)}{t} \right\| = \lim_{t \to 0^+} \left \| \frac{\gamma(t) - \gamma(0)}{t}  \right \| = \| \gamma'(0) \| = 1
+\]
+quindi
+\[
+\lim_{t \to 0^+} \left \| \frac{t}{\gamma(t)} \right \| = 1
+\]
+ovvero
+\begin{equation} \label{e:limt/gammat=1}
+\forall \, \sigma > 0 , \, \exists \, \delta \in ]0, \epsilon[ \, : \, \left \| \frac{t}{\gamma(t)}  \right \| \le 1 + \sigma, \, \forall \, t \in ]0,\delta].
+\end{equation}
+Allora
+\begin{equation}\label{e:t/gammat<1+sigma}
+\frac{1}{C} \frac{\| t \|}{\| \gamma(t) \|} \le \frac{1}{C}(1+\sigma), \, \forall \, t \in ]0,\delta].
+\end{equation}
+
+In particolare posso scegliere $\sigma$ abbastanza piccolo di modo che
+\begin{equation}\label{e:roh<1}
+\rho:=\frac{1}{C}(1+\sigma) < 1.
+\end{equation}
+
+\noindent
+Otteniamo da \eqref{e:limt/gammat=1},  \eqref{e:t/gammat<1+sigma} e \eqref{e:roh<1} che 
+\[
+\exists \, \rho \in \left]\frac{1}{C}, 1\right[, \ \  
+\exists \, \delta \in ]0, \epsilon[  \ \text{ tale che }\ 
+\frac{1}{C} \frac{| t |}{\| \gamma(t) \|} \le \rho\quad  \forall \, t \in ]0, \delta]
+\]
+e quindi, da \eqref{e:tPhi<tfgamma},
+\begin{equation} \label{e:tPhiroh}
+| t |  | \Phi'(t) | \le \rho | \Phi(t) |\quad  \forall \, t \in ]0, \delta[.
+\end{equation}
+
+Definiamo ora la funzione: $g:]0,\delta[\rightarrow 
+\mathbb{R}$,      $g(t) = \log(| \Phi(t)|)$.
+$g$ è derivabile e risulta 
+\[
+g'(t) = \frac{d}{dt}(\log(| \Phi(t) |) = \frac{\Phi'(t)}{\Phi(t)}
+\]
+quindi, per \eqref{e:tPhiroh}
+\[
+| g'(t) | = \frac{| \Phi'(t) |}{| \Phi(t) |} \le \frac{\rho}{t} \quad \forall \, t \in ]0,\delta[.
+\]
+
+Allora, per ogni  $s\in ]0,\delta[$, si ha 
+\[
+\left| \log\big| \frac{\Phi(\delta)}{\Phi(s)} \big| \right| = \left| g(\delta) - g(s) \right| =  \left| \int_{s}^\delta g'(t)\, dt \right| 
+\le \int_{s}^\delta \frac{\rho}{t}\, dt = \rho \log \left| \frac{\delta}{s} \right| = \log \left| \frac{\delta}{s} \right| ^\rho,
+\]
+da cui
+\[
+\frac{ | \Phi(\delta) |}{| \Phi(s) |} \le \left( \frac{\delta}{s} \right)^\rho.
+\]
+Abbiamo così ottenuto
+\[
+| \Phi(s) | \ge \left( \frac{s}{\delta} \right)^\rho | \Phi(\delta) | \quad \forall \, s \in ]0, \delta[.
+\]
+
+\noindent
+Dato che $\delta < 1$ si ha che $\displaystyle \frac{s}{\delta} \ge s$, e quindi
+\[
+\frac{| \Phi(s) |}{s^\rho} \ge | \Phi(\delta) | \quad \forall \, s \in ]0, \delta[,
+\]
+da cui segue, tenendo conto di \eqref{e:gammaDfgamma},
+\begin{equation} \label{e:limsPhis}
+\liminf_{s \to 0^+} \left | \frac{\Phi(s)}{s^\rho} \right | \ge | \Phi(\delta) | > 0.
+\end{equation}
+
+Essendo $\Phi \in C^1$ e scrivendo  il suo 
+ sviluppo di Taylor centrato in $0$ con il resto di Lagrange si ha
+\[
+\Phi(s) = \Phi(0) + \Phi'(\tau)s
+\]
+con $\tau \in ]0,s[$.
+
+Siccome
+\[
+\Phi(0) = f(\gamma(0)) = f(0) = 0
+\]
+si ha
+\begin{equation} \label{e:PhisPhi'tau}
+\Phi(s) = \Phi'(\tau)s.
+\end{equation}
+
+$\Phi'$ è continua su $[0, \delta]$.
+Definiamo
+\[
+M := \max_{t \in [0, \delta]} | \Phi'(t) |.
+\]
+Tendendo conto di \eqref{e:PhisPhi'tau} si ha
+\begin{equation} \label{e:Phis/s<M}
+\left | \frac{\Phi(s)}{s} \right | \le M \quad \forall \, s \in ]0, \delta[.
+\end{equation}
+
+Da \eqref{e:Phis/s<M} si ha che
+\begin{equation} \label{e:PhisrohM}
+\left | \frac{\Phi(s)}{s^\rho} \right | = \frac{| \Phi(s) |}{s} s^{1- \rho} \le M s^{1-\rho} \quad \forall \, s \in ]0,\delta[
+\end{equation}
+e quindi da \eqref{e:limsPhis} e \eqref{e:PhisrohM} 
+\[
+\liminf_{s \to 0^{+}} \left | \frac{\Phi(s)}{s^\rho} \right | \le \lim_{s \to 0^+}M s^{1-\rho} = 0
+\]
+e ciò è in contraddizione con \eqref{e:limsPhis}.
+\end{proof}
+
+
+\section{Un risultato preliminare}
+
+In questo paragrafo, dimostreremo il seguente risultato.
+
+
+
+\begin{prop} \label{t:morseRn}
+Siano $U \subseteq \mathbb{R}^m$ un aperto e $f:U \rightarrow \mathbb{R}^n$ una funzione di classe $C^p(U)$. Se $\displaystyle p\geq \frac{m}{n}$, allora $f(C(f))$ ha misura zero in $\mathbb{R}^n$, dove $C(f) := \{x \in U \, : \, Df(x) = 0 \}$.
+\end{prop}
+
+
+
+
+
+Tale  risultato implicherà facilmente il Teorema di Morse (Teorema \ref{t:Morse}), riguardante le funzioni reali, 
+ma verrà anche utilizzato per dimostrare il caso più generale di funzioni a valori vettoriali,   Teorema di Morse-Sard (Teorema \ref{t:misf(c(f))=0}). 
+
+
+\medbreak
+
+Per la dimostrazione della Proposizione \ref{t:morseRn}, faremo uso del seguente risultato. 
+
+
+
+\begin{lem} \label{t:lemlim}
+Sia $U \subseteq \mathbb{R}^m$ aperto. Sia $f:U \rightarrow \mathbb{R}, f \in C^r(U)$, $r \ge 1.$ Allora
+\[
+\lim_{\begin{subarray}{l} y \to x \\ y \in crit(f) \end{subarray}} \frac{| f(y) - f(x)|}{\| y-x \|^r} = 0 \quad \forall \, x \in crit(f)'\cap U
+\]
+dove  $crit(f) = \{x \in U \, : \,  \nabla f(x) =0 \}$.
+\end{lem}
+
+
+
+\begin{proof}
+Per assurdo, supponiamo che:
+\[
+\exists \, \epsilon > 0 \, : \, \forall \, k \in \mathbb{N}\smallsetminus\{0\} \, \exists \, y_{k} \in B(x, \frac{1}{k}) \cap crit(f) \smallsetminus \{x\} \text{ e }
+\frac{| f(y_{k}) - f(x) |}{\| y_{k} - x \| ^r} \ge \epsilon.
+\]
+
+Ciò definisce una successione di $(y_{k})_{k \in \mathbb{N}} \subset crit(f)$ tale che:
+\begin{equation} \label{e:limykx}
+ \lim_{k \to +\infty} y_{k} = x 
+\end{equation}
+e tale che
+\begin{equation} \label{e:fyk>eps}
+| f(y_{k}) - f(x)| \ge \epsilon \| y_{k} - x \|^r, \, \forall \, k \in \mathbb{N} \smallsetminus \{0\}.
+\end{equation}
+
+Sia $\displaystyle \widetilde{f}(y) = \sum_{\| \alpha \| \le r} \frac{D^\alpha f(x)}{\alpha !} (y-x)^\alpha$ il polinomio di Taylor di $f$ di grado $r$ centrato in $x$.
+
+\noindent
+Tenendo conto di \eqref{e:fyk>eps} e del fatto che $\tilde{f}(x) = f(x)$, si ha
+\begin{align*}
+| \widetilde{f}(y_{k}) - \widetilde{f}(x) |& = | f(y_{k}) - f(x) +\widetilde{f}(y_{k}) - f(y_{k}) | \\
+&\ge | f(y_{k}) - f(x) | - | \widetilde{f}(y_{k}) - f(y_{k}) | \\ & \ge \epsilon \| y_{k} -x \| ^r - | \widetilde{f}(y_{k}) - f(y_{k}) |.
+\end{align*}
+
+\noindent
+Abbiamo quindi dedotto che
+\begin{equation} \label{e:f>eps}
+| \widetilde{f}(y_{k}) - \widetilde{f}(x) | \ge \epsilon \| y_{k} -x \| ^r - | \widetilde{f}(y_{k}) - f(y_{k}) |.
+\end{equation}
+
+D'altra parte, dalla formula di Taylor con il resto di Peano, vedi Teorema \ref{t:Peano}, si ha che
+\begin{equation} \label{e:fykopiccolo}
+| \widetilde{f}(y_{k}) - f(y_{k}) | = o(\| y_{k} - x\|^r)\text{ $\quad$ per $k \to +\infty$}.
+\end{equation}
+
+\noindent
+Per definizione di o-piccolo e \eqref{e:fykopiccolo} ne deduciamo in particolare che
+\[
+\exists \, N \in \mathbb{N} \text{ tale che } | \widetilde{f}(y_{k}) - f(y_{k}) | < \frac{\epsilon}{2} \| y_{k} -x \| ^r \quad \forall \, k \ge N,
+\]
+quindi, da \eqref{e:f>eps},
+\begin{equation} \label{e:fyk<eps2yk5}
+| \widetilde{f}(y_{k}) - \widetilde{f}(x) | \ge \frac{\epsilon}{2} \| y_{k} -x \|^r \quad \forall \, k \ge N.
+\end{equation}
+
+La derivata di $f$ ha un polinomio di Taylor che è la derivata del polinomio di Taylor di $f$, quindi si ha
+\[
+\nabla f(y_{k}) = \nabla \widetilde{f}(y_{k}) + o(\| y_{k} -x \| ^{r-1}), \, \forall \, k \ge N
+\]
+e dato che $\nabla f(y_{k}) = 0 $ per ogni $k \in \mathbb{N}$ si ha
+\begin{equation} \label{e:nablafopiccolo}
+\| \nabla \widetilde{f}(y_{k}) \|= o(\| y_{k} - x \| ^{r-1}) \quad \forall \, k \ge N.
+\end{equation}
+
+Consideriamo ora il caso in cui $f(x)=0$ e quindi $\widetilde{f}(x) = 0$. 
+Definiamo l'insieme 
+\[
+V := \{ \xi \in \mathbb{R}^m \,:\, \xi = u -x, \  u \in U \}.
+\]
+Siccome $x \in U$ allora $0 \in V$. 
+
+Definiamo la funzione 
+$h:V \rightarrow \mathbb{R}$, 
+$h(v) = \widetilde{f}(v + x).$
+Dato che $\widetilde{f}$ è una funzione polinomiale, anche $h$ è una funzione polinomiale ed è tale che
+\[
+h(0) = \widetilde{f} (x) = 0
+\]
+
+Applicando la Proposizione \ref{t:f<CxDf} ad $h$ con $C=2$, si ha che
+\[
+\exists \, W \text{ intorno di $0$ tale che } | h(v) | \le 2 \| v \| \| \nabla h(v) \| \quad \forall \, v \in W.
+\] 
+
+Definiamo l'insieme $Z := \{ w + x \, : \, w \in W\}$. $Z$ è intorno di $x$, e dato che $\nabla h(v) = \nabla \widetilde{f}(v+x)$, si ha
+\[
+| \widetilde{f}(v+x) | \le 2 \| v \| \| \nabla \widetilde{f}(v+x) \|.
+\]
+Ossia, dato che $v \in V$ allora $v = u - x$, quindi $u = v + x$, si ha
+\begin{equation} \label{e:fu<2uf}
+| \widetilde{f}(u) | \le 2 \| u - x \| \| \nabla \widetilde{f}(u) \| \quad \forall \, u \in Z.
+\end{equation}
+
+Da \eqref{e:limykx} e dal fatto che $Z$ è intorno di $x$ ne deduciamo che la successione $(y_{k})_{k \in \mathbb{N}}$ appartiene definitivamente a $Z$, quindi
+\[
+\exists \, M \in \mathbb{N}, M \ge N \text{ tale che } y_{k} \in Z \quad \forall \, k \ge M
+\]
+allora, da \eqref{e:fu<2uf} con $u=y_{k}$ e $k \ge M$ si ha che
+\begin{equation} \label{e:fyk<2ykf}
+| \widetilde{f}(y_{k}) | \le 2\| y_{k} - x \| \| \nabla \widetilde{f} (y_{k}) \|
+\end{equation}
+e quindi da \eqref{e:nablafopiccolo} e \eqref{e:fyk<2ykf}
+\[
+| \widetilde{f}(y_{k}) | \le 2\| y_{k} -x \| o(\| y_{k} -x \|^{r-1}) = o(\| y_{k} -x \| ^r).
+\]
+Abbiamo quindi dedotto che
+\begin{equation} \label{e:fyk<ykr}
+| \widetilde{f}(y_{k}) | \le o(\| y_{k} -x \| ^r) \quad \forall \, k \ge M.
+\end{equation}
+
+Da \eqref{e:fyk<eps2yk5} e \eqref{e:fyk<ykr} si ha che
+\[ 
+\frac{\epsilon}{2} \| y_{k} -x \| ^r \le | \widetilde{f}(y_{k}) | \le o(\| y_{k} -x \| ^r) \quad \forall \, k \ge M , 
+\]
+quindi
+\[ 
+\frac{\epsilon}{2} \le \lim_{k \to +\infty} \frac{o(\| y_{k} - x \| ^r)}{\| y_{k} - x \| ^r} = 0.
+\]
+Da cui segue che $\epsilon \le 0$, che è assurdo perché $\epsilon > 0$.
+Quindi vale al tesi.
+
+Consideriamo ora il caso $f(x) \neq 0$.
+Definiamo la funzione $g:U \rightarrow \mathbb{R}$, $g \in C^k (U)$, tale che
+\[ 
+g(y) = f(y) - f(x)
+\]
+quindi $g(x) = f(x) - f(x) = 0$ e $crit(f) = crit(g)$.
+
+Per quanto visto nel caso $f(x) = 0$ applicato alla funzione $g$ si ha che
+\[ 
+\lim_{\begin{subarray}{l} y \to x \\ y \in crit(g) \end{subarray}} \frac{| g(y) |}{\| y-x \| ^r} =0 \quad \forall \, x \in crit(g)' \cap U
+\]
+ossia
+\[ 
+\lim_{\begin{subarray}{l} y \to x \\ y \in crit(f) \end{subarray}} \frac{| f(y) - f(x) |}{\| y-x \| ^r} =0 \quad \forall \, x \in crit(f)' \cap U.
+\]
+Abbiamo quindi  dimostrato la tesi.
+
+\end{proof}
+
+
+
+
+
+Siamo ora in grado di dimostrare la Proposizione \ref{t:morseRn}, facendo uso, sia del lemma sopra, che del Teorema di ricoprimento \ref{t:vol3m}.
+
+
+\begin{proof}[Dimostrazione della Proposizione  \ref{t:morseRn}]
+Dato che $U$ è unione numerabile di insiemi limitati e dato che una unione numerabile di insiemi di misura zero ha misura zero, possiamo supporre senza perdita di generalità che $U$ sia limitato.
+
+Osserviamo che 
+\[
+C(f) = (C(f) \cap C(f)') \cup (C(f) \setminus C(f)').
+\]
+
+Consideriamo come primo caso gli $\bar{x} \in C(f) \cap C(f)'$.
+
+$f:U \rightarrow \mathbb{R}^n$, quindi $f(\bar{x}) = (f_1(\bar{x}), \cdots f_n(\bar{x}))$, con $f_i : U \rightarrow \mathbb{R}$. Possiamo applicare il Lemma \ref{t:lemlim} alle singole coordinate della funzione $f$ e quindi per ogni $i \in \mathbb{N}$
+\[
+\lim_{\begin{subarray}{l}  y \to \bar{x} \\ y \in crit(f) \end{subarray}} \frac{| f_i(y) - f_i(\bar{x}) |}{\| y - \bar{x} \|^p} = 0
+\]
+Abbiamo quindi dedotto che
+\[
+\lim_{\begin{subarray}{l}  y \to \bar{x} \\ y \in crit(f) \end{subarray}} \frac{\| f(y) - f(\bar{x}) \|}{\| y - \bar{x} \|^p} = 0
+\]
+cioè
+\[
+\forall \, \epsilon >0, \, \exists \, \delta_{\bar{x}} \in ]0,1[ \text{ tale che se } 
+\]
+\[
+y \in C(f)\cap B(\bar{x}, \delta_{\bar{x}}) \text{ allora } 
+\| f(y) - f(\bar{x}) \| < \left (\frac{\epsilon \omega_m}{\omega_n 3^m \operatorname{vol}(U)} \right )^\frac{1}{n} \| y- \bar{x} \|^p.
+\]
+
+Pertanto se $y \in B( \bar{x}, \delta_{\bar{x}}) \cap C(f)$ si ha che
+\[
+f(y) \in D_{\bar{x} }
+\]
+dove $\displaystyle D_{\bar{x}} = B \left (f(\bar{x}), (\frac{\epsilon \omega_m}{\omega_n 3^m \operatorname{vol}(U)})^\frac{1}{n} \delta_{\bar{x}} ^p \right)$ in $\mathbb{R}^n$.
+
+Riassumendo:
+\begin{equation} \label{e:xinC(f)}
+\forall \, x \in C(f) \cap C(f)', \ \forall \, \epsilon > 0 \  \exists \, \delta_x \in ]0,1[ \text{ tale che }
+f(C(f) \cap B(x, \delta_x) \subseteq D_x
+\end{equation}
+
+con $D_x = B \left (f(x), (\frac{\epsilon \omega_m}{\omega_n 3^m \operatorname{vol}(U)})^\frac{1}{n} \delta_x ^p \right)$ palla di $\mathbb{R}^n$ \\
+
+
+Il secondo caso possibile è il caso di $\bar{x} \in C(f) \setminus C(f)'$. In questo caso $\bar{x}$ è un punto isolato di $C(f)$, quindi esiste $\delta_{\bar{x}} \in ]0,1[$ tale che $B(\bar{x}, \delta_{\bar{x}}) \cap C(f) = \{\bar{x}\}$.
+
+Quindi
+\[
+f(B(\bar{x},\delta_{\bar{x}}) \cap C(f)) = \{f( \bar{x})\}.
+\]
+Abbiamo quindi che per ogni $\epsilon > 0$ risulta
+\[
+f(C(f) \cap B(\bar{x}, \delta_{\bar{x}})) \subset D_{\bar{x}}
+\]
+dove $D_{\bar{x}} = B \left(f(\bar{x}), (\frac{\epsilon \omega_m}{\omega_n 3^m \operatorname{vol}(U)})^\frac{1}{n} \delta_{\bar{x}} ^p \right)$ \\
+
+Riassumendo:
+\begin{equation} \label{e:xinC(f)-C(f)'}
+\forall \, x \in C(f) \setminus C(f)', \, \forall \, \epsilon > 0 \ \exists \, \delta_{x} \in ]0,1[ \text{ tale che } f(C(f) \cap B(x, \delta_x)) \subset D_x
+\end{equation}
+dove $D_x = B \left (f(x), (\frac{\epsilon \omega_m}{\omega_n 3^m \operatorname{vol}(U)})^\frac{1}{n} \delta_x ^p \right)$
+
+Da \eqref{e:xinC(f)} e \eqref{e:xinC(f)-C(f)'} segue che 
+\begin{equation} \label{e:fcDx}
+\forall \, x \in C(f), \, \forall \, \epsilon > 0, \  \exists \, \delta_x \in ]0,1[ \text { tale che } f(C(f) \cap B(x, \delta_x)) \subset D_x.
+\end{equation}
+
+Dato che $\operatorname{vol}(B(x, \delta_x))=\omega_m \delta_x ^m$ e che $\displaystyle p\geq \frac{m}{n}$, possiamo stimare $\operatorname{vol}(D_x)$:
+\begin{align} \label{e:volDx}
+\operatorname{vol}(D_x) &= \omega_n \frac{\epsilon \omega_m}{\omega_n 3^m \operatorname{vol}(U)} \delta_x ^ {pn} = \frac{\epsilon \omega_m}{3^m \operatorname{vol}(U)} \delta_x ^{pn} \nonumber \\ &\le \frac{\epsilon \omega_m}{3^m \operatorname{vol}(U)} \delta_x ^m = \frac{\epsilon}{3^m \operatorname{vol}(U)} \operatorname{vol}(B(x, \delta_x)).
+\end{align}
+
+Dal Lemma \ref{t:vol3m} esiste un insieme finito o numerabile $\{x_i\}_{i \in I} \subset C(f)$ tale che
+\begin{equation} \label{e:C(f)cUiB}
+C(f) \subset \cup_{i} B(x_i, \delta_{x_i}) \text{ e } \sum_{i} \operatorname{vol}(B(x_i, \delta_{x_i})) < 3^m \operatorname{vol}(U).
+\end{equation}
+
+\noindent
+Da \eqref{e:C(f)cUiB} si ha
+\[
+C(f) = C(f) \cap (\cup_{i} B(x_i, \delta_{x_i})) = \cup_{i}( C(f) \cap B(x_i, \delta_{x_i}))
+\]
+e, siccome $f(\cup_{i} A_i) = \cup_{i} f(A_i)$, usando \eqref{e:fcDx}
+\begin{equation} \label{e:fcf=UDxi}
+f(C(f)) = \cup_{i} f(C(f)\cap B(x_i, \delta_{x_i})) \subset \cup_{i} D_{x_i}.
+\end{equation}
+
+Da \eqref{e:volDx} e \eqref{e:C(f)cUiB} segue che per ogni $\epsilon >0$
+\begin{align*}
+\sum_{i \in I}\operatorname{vol}(D_{x_i}) & \le \sum_{i \in I} \frac{\epsilon}{3^m \operatorname{vol}(U)}  \operatorname{vol}(B(x_i, \delta_{x_i})) 
+\\ &= \frac{\epsilon}{3^m \operatorname{vol}(U)} \sum_{i \in I} \operatorname{vol}(B(x_i, \delta_{x_i}))
+\\ &\leq \frac{\epsilon}{3^m \operatorname{vol}(U)} 3^m \operatorname{vol}(U) = \epsilon.
+\end{align*}
+Allora, per \eqref{e:fcf=UDxi}, $f(C(f))$ ha misura zero in $\mathbb{R}^n$.
+\end{proof}
+
+
+  
+\section{Il Teorema di Morse-Sard: il caso $m\ge n$}
+
+
+Come conseguenza della Proposizione  \ref{t:morseRn}  si ottiene il Teorema di Morse, che riguarda il caso $n=1$ del più generale Teorema di Morse-Sard. Più precisamente vale il seguente risultato.
+
+
+\begin{thm}[Teorema di Morse] \label{t:Morse}
+Sia $U$ un aperto di $\mathbb{R}^m$ e  $f:U \rightarrow \mathbb{R}$ una funzione di classe $C^m(U)$. Allora $f(C(f))$ ha misura zero in $\mathbb{R}$, 
+dove  $C(f) = \{x \in U\,:\, \nabla f(x) = 0\}$.
+\end{thm}
+\begin{proof}
+Ricordiamo che in $\mathbb{R}$, $C(f)=crit(f)$. 
+
+Consideriamo $f_k : U \cap (]-k,k[)^m \rightarrow \mathbb{R}$ e applichiamo la Proposizione 
+\ref{t:morseRn}  a $f_k$.
+Allora $f_k(C(f_k)) = f(C(f_k))$ ha misura nulla in $\mathbb{R}$.
+Si conclude osservando che 
+\[
+C(f) = \cup_{k \in \mathbb{N}} C(f_k).
+\]
+\end{proof}
+
+
+Diamo ora l'enunciato e la dimostrazione del Teorema di Morse-Sard, nel caso generale $m\ge n$, con $n\ge 1$.
+
+
+
+
+
+
+
+
+\begin{thm}[Teorema di Morse-Sard] \label{t:misf(c(f))=0}
+Sia $m \ge n$ e $f:U\rightarrow \mathbb{R}^n$, con $U$ aperto di $\mathbb{R}^m$, una funzione di classe $C^{m-n+1}$. Sia $crit(f) = \{x\in U \, : \, Df(x):\mathbb{R}^m \rightarrow \mathbb{R}^n \text{ non è suriettiva}\} $. Allora $f(crit(f))$ ha misura zero in $\mathbb{R}^n$.
+
+
+\end{thm}
+
+
+\begin{proof}
+
+
+Sia $C_{p} = \{ x \in U \,:\, \operatorname{rg}Df(x) = p \}$, allora $crit(f) = \cup_{p=0}^{n-1} C_{p}$.
+
+Sia $\bar{x} \in C_p$, ossia $\bar{x} \in U$ tale che 
+\[
+\operatorname{rg}Df(\bar{x})=p.
+\]
+
+Quindi esiste una sottomatrice $p \times p$ di $Df(\bar{x})$ con determinante diverso da zero.
+
+Sia $f=(g,h)$ con $g:U \rightarrow \mathbb{R}^p, \, g=(f_1, ..., f_p)$ e $h:U \rightarrow \mathbb{R}^{n-p}, \, h=(f_{p+1}, ..., f_n)$.
+Considerando inoltre $x=(\xi, \eta) \in \mathbb{R}^p \times \mathbb{R}^{m-p}$ allora si ha
+
+\[
+Df(x)=\begin{bmatrix}
+\frac{\partial{g}}{\partial \xi} (\xi, \eta) & \frac{\partial g}{\partial \eta} (\xi, \eta)\\
+\frac{\partial{h}}{\partial \xi} (\xi, \eta) & \frac{\partial h}{\partial \eta} (\xi, \eta)
+\end{bmatrix} \in M(n \times m).
+\]
+
+Non è restrittivo supporre che  sia $\bar{x} = (\bar{\xi}, \bar{\eta}) \in \mathbb{R}^p \times \mathbb{R}^{m-p}$,
+\begin{equation} \label{e:detgxinot0}
+\operatorname{det} \frac{\partial{g}}{\partial \xi} (\bar{\xi}, \bar{\eta}) \neq 0.
+\end{equation}
+
+Per la continuità del determinante e da \eqref{e:detgxinot0} si ha che
+\begin{align} \label{e:OmegaUdet}
+&\exists O \text{ aperto di } \mathbb {R}^p, \text{ con } \bar{\xi} \in O \nonumber \\
+&\exists \Omega \text{ aperto di } \mathbb{R}^{m-p}, \text{ con } \bar{\eta} \in \Omega \text{ tali che } \nonumber\\
+&O \times \Omega \subset U\text{ e } \operatorname{det} \frac{\partial g}{\partial \xi} (\xi, \eta) \neq 0 \quad \forall \, (\xi, \eta) \in O \times \Omega. 
+\end{align}
+
+Definiamo ora la funzione $F:O \times \Omega \times \mathbb{R}^p \times \mathbb{R}^{m-p} \rightarrow \mathbb{R}^p \times \mathbb{R}^{m-p}$, $F \in C^{m-n+1}$ nel seguente modo:
+\[
+F(\xi, \eta, u, v) := \left ( g(\xi, \eta) - u, \eta - v \right ).
+\]
+
+Osserviamo che $F = (F_1, F_2)$ con
+\begin{align*}
+&F_1:O \times \Omega \times \mathbb{R}^p \times \mathbb{R}^{m-p} \rightarrow \mathbb{R}^p, \  F_1(\xi, \eta, u, v) = g(\xi, \eta) - u \\
+&F_2:O \times \Omega \times \mathbb{R}^p \times \mathbb{R}^{m-p} \rightarrow \mathbb{R}^{m-p}, \  F_2(\xi, \eta, u, v) = \eta - v.
+\end{align*}
+In questo modo abbiamo
+\[DF(\xi, \eta, u, v) = 
+\begin{bmatrix}
+\frac{\partial F_1}{\partial \xi}(\xi, \eta, u, v) & \frac{\partial F_1}{\partial \eta}(\xi, \eta, u, v) & \frac{\partial F_1}{\partial u}(\xi, \eta, u, v) & \frac{\partial F_1}{\partial v}(\xi, \eta, u, v) \\
+\frac{\partial F_2}{\partial \xi}(\xi, \eta, u, v) & \frac{\partial F_2}{\partial \eta}(\xi, \eta, u, v) & \frac{\partial F_2}{\partial u}(\xi, \eta, u, v) & \frac{\partial F_2}{\partial v}(\xi, \eta, u, v)
+\end{bmatrix}
+\]
+cioè
+\[DF(\xi, \eta, u, v) = 
+\begin{bmatrix}
+\frac{\partial g}{\partial \xi}(\xi, \eta) & \frac{\partial g}{\partial \eta}(\xi, \eta) & -I_p & 0 \\
+0 & I_{m-p} & 0 & -I_{m-p}
+\end{bmatrix}
+\]
+da cui segue che
+\[
+\frac{\partial(F_1, F_2)}{\partial (\xi, \eta)}(\xi, \eta, u, v) = 
+\begin{bmatrix}
+\frac{\partial g}{\partial \xi}(\xi, \eta) & \frac{\partial g}{\partial \eta}(\xi, \eta) \\
+0 & I_{m-p}
+\end{bmatrix}.
+\]
+
+Per \eqref{e:OmegaUdet} si ha che per ogni $(\xi, \eta) \in O \times \Omega$ e $(u,v) \in \mathbb{R}^p \times \mathbb{R}^{m-p}$
+\begin{align*}
+\nonumber \operatorname{det}{\frac{\partial(F_1, F_2)}{\partial (\xi, \eta)}}(\xi, \eta, u, v) &= \operatorname{det}\frac{\partial g}{\partial \xi}(\xi, \eta) \operatorname{det} I_{m-p}\\ &= \operatorname{det}\frac{\partial g}{\partial \xi}(\xi, \eta) \neq 0.
+\end{align*}
+
+\noindent
+Allora
+\begin{equation} \label{DFrmax}
+\forall (\xi, \eta, u, v) \in O \times \Omega \times \mathbb{R}^p \times \mathbb{R}^{m-p}, \quad DF(\xi, \eta, u, v)\text{ ha rango massimo}.
+\end{equation}
+
+Ponendo $\bar{u} = g(\bar{\xi}, \bar{\eta})$ e $\bar{v} = \bar{\eta}$ si ha che
+\begin{equation} \label{e:Fzero}
+F(\bar{\xi}, \bar{\eta}, \bar{u}, \bar{v}) = (0, 0),
+\end{equation}
+ossia $(\bar{\xi}, \bar{\eta}, \bar{u}, \bar{v})$ appartiene all'insieme di livello zero di $F$,
+\[
+L_0(F) = \{ (\xi, \eta, u, v) \in O \times \Omega \times \mathbb{R}^p \times \mathbb{R}^{m-p} \, : \, g(\xi, \eta) = u, \ \eta = v \}.
+\]
+
+Dato che valgono \eqref{DFrmax} e \eqref{e:Fzero} possiamo applicare il teorema della funzione implicita e si ha
+\begin{align*}
+&\exists \, U \text{ intorno aperto di } g(\bar{\xi}, \bar{\eta}) \text{ in } \mathbb{R} ^ p, \ 
+\exists \, V \text{ intorno aperto di } \bar{\eta} \text{ in } \mathbb{R}^{m-p}\\
+&\exists \, W \subset O \times \Omega \text{ aperto di } \mathbb{R}^{m}, \ 
+\exists \, \varphi:U\times V \rightarrow W, \ \varphi \in C^{m-n+1}
+\end{align*}
+tale che
+\begin{equation}
+\begin{gathered}
+\{ (\xi, \eta, u, v) \in W \times U \times V \, : \, g(\xi, \eta) 
+= u, \ \eta=v\}= \\ 
+= \{ (\varphi(u,v), u, v) \, : \, (u,v) \in U \times V \}.
+\end{gathered}
+\end{equation}
+
+Inoltre vale
+\[
+\frac{\partial \varphi}{\partial (u,v)}(u,v) = - \left(\frac{\partial F}{\partial (\xi, \eta)} (\varphi(u,v), u, v) \right)^{-1} \frac{\partial F}{\partial (u,v)}(\varphi(u,v), u, v) \quad \forall \, (u,v) \in U \times V
+\]
+cioè per ogni $(u,v) \in U \times V$
+\[
+\frac{\partial{\varphi}}{\partial (u,v)}(u,v) = -
+\begin{bmatrix}
+\frac{\partial g}{\partial \xi}(\varphi(u,v)) & \frac{\partial g}{\partial \eta}(\varphi(u,v)) \\
+0 & I_{m-p}
+\end{bmatrix}^{-1} 
+\begin{bmatrix}
+-I_p & 0 \\
+0 & -I_{m-p}
+\end{bmatrix},
+\]
+quindi per il teorema di Binet
+\[
+\operatorname{det} \frac{\partial \varphi}{\partial (u,v)} (u,v) = -(-1)^m \frac{1}{\operatorname{det} \frac{\partial g}{\partial \xi} (\varphi(u,v))} \neq 0.
+\]
+
+Abbiamo cosi dedotto che 
+\begin{equation} \label{e:detphinz}
+\forall (u,v) \in U \times V, \quad \operatorname{det} \frac{\partial \varphi}{\partial (u,v)} (u,v) \neq 0.
+\end{equation}
+
+Per \eqref{e:detphinz} possiamo applicare il teorema di invertibilità locale alla funzione $\varphi$ nell'insieme $U \times V$ e si ha che $\varphi$ è un diffeomorfismo locale di classe $C^{m-n+1}$ (con inversa di classe $C^{m-n+1}$) in $U \times V$.
+
+Osserviamo ora che la funzione $f \circ \varphi : U \times V \rightarrow \mathbb{R}^n$ è ben definita, infatti $\varphi : U \times V \rightarrow W$, con $W \subset O \times \Omega$, e $f:O \times \Omega \rightarrow \mathbb{R}^n$, quindi si ha
+\[
+f \circ \varphi (u,v) = (g(\varphi(u,v)), h(\varphi(u,v)) = (u, (h \circ \varphi) (u,v)).
+\]
+
+Definiamo la funzione $\tilde{f} : U \times V \rightarrow \mathbb{R}^{n-p}$, $\tilde{f} = h \circ \varphi$. Si ha allora che, a meno di un diffeomorfismo locale la funzione $f$ ha forma
+\begin{equation} \label{e:fftilde}
+f(u,v) = (u, \tilde{f}(u,v)).
+\end{equation}
+
+Si ha
+\[
+Df(u,v) = 
+\begin{bmatrix}
+D_u f(u,v) & D_v f(u,v) 
+\end{bmatrix}
+= 
+\begin{bmatrix}
+Id_p & 0 \\ 
+D_u \tilde{f}(u,v) & D_v \tilde{f}(u,v)
+\end{bmatrix}
+\]
+da cui $(u,v)\in C_p$ se e solo se $D_v \tilde{f}(u,v) = 0$. Infatti se $D_v \tilde{f}(u,v) \neq 0$ avremmo che la matrice non avrebbe più rango $p$.
+Allora
+\begin{equation} \label{e:ridefCp}
+C_p = \{ (u,v) \in U \times V \, : \, D_v \tilde{f}(u,v)=0 \}.
+\end{equation}
+
+
+Fissato $u\in \mathbb{R}^p$, definiamo
+\[
+F_u := \{ (u,v) \, : \, v \in \mathbb{R} ^ {n-p} \}
+\]
+e
+\begin{equation} \label{e:f_udef}
+\tilde{f}_u(v) := \tilde{f}(u,v).
+\end{equation}
+Allora si ha 
+\begin{align} \label{e:FuCp}
+F_u \cap C_p &= \{(u,v) \, : \, v \in \mathbb{R}^{n-p}, \  D_v \tilde{f}(u, v) =0\} \nonumber \\
+&= \{(u,v) \, : \, v \in \mathbb{R}^{n-p}, \  D \tilde{f}_u(v) = 0 \}.
+\end{align}
+
+Definiamo 
+\begin{equation} \label{e:defN}
+N := \{ v \in V \, : \, D\tilde{f}_u (v) = 0 \}.
+\end{equation}
+
+Osserviamo che da \eqref{e:fftilde} e \eqref{e:f_udef}
+\begin{align*}
+f(F_u) &= \{ f(u,v) \, : \, v \in \mathbb{R}^{n-p} \}  
+\\ &= \{ (u, \tilde{f}(u,v)) \, : \, v \in \mathbb{R}^{n-p} \} 
+\\ &= \{ (u,\tilde{f}_u(v)) \, : \, v \in \mathbb{R}^{n-p} \} 
+\\ &= \{u\} \times \{ \tilde{f}_u(v) \, : \; v \in \mathbb{R}^{n-p} \}
+\end{align*}
+da cui ne deduciamo che
+\begin{equation} \label{e:f(F_u)}
+f(F_u) = \{ u \} \times \{ \tilde{f}_u(v) \, : \; v \in \mathbb{R}^{n-p} \}. 
+\end{equation}
+
+Da \eqref{e:FuCp}, \eqref{e:defN} e \eqref{e:f(F_u)} si ha
+\begin{equation} \label{e:uxf_u(N)}
+f(F_u \cap C_p) = \{ u \} \times \{ \tilde{f}_u(v) \, : \; v \in \mathbb{R}^{n-p}, \  D\tilde{f}_u(v) = 0 \} \subseteq \{ u \} \times \tilde{f}_u(N).
+\end{equation}
+Osserviamo ora che, per $p \le n -1$
+\begin{equation} \label{e:mnp}
+m-n+1 \ge \frac{m-p}{n-p} = \frac{m-n}{n-p} +1.
+\end{equation}
+e che
+\begin{equation} \label{e:Ncritf_u}
+N = crit(\tilde{f}_u).
+\end{equation}
+
+Da \eqref{e:mnp} e \eqref{e:Ncritf_u} applicando la Proposizione \ref{t:morseRn} si ha
+\[
+\tilde{f}_u (N) \text{ ha misura zero in } \mathbb{R}^{n-p} \quad \forall \, u \, \in U. 
+\] 
+Siccome prodotto di insiemi di misura zero ha misura zero si ha
+\[
+\{u\} \times \tilde{f}_u (N) \text{ ha misura zero }
+\]
+e quindi da \eqref{e:uxf_u(N)}
+\[
+f(F_u \cap C_p) \text{ ha misura zero in } \mathbb{R}^n.
+\]
+
+Siccome $D$ è aperto allora $D$ è unione numerabile di palle chiuse. Dato che le palle chiuse sono compatte possiamo supporre senza perdita di generalità che $C_p$, e quindi $f(C_p)$, sono compatti.
+
+Posto $K = f(C_p)$ esso è un compatto di $\mathbb{R}^n$, e da \eqref{e:ridefCp} si ha
+\begin{align*}
+K = f(C_p) &= \{ f(u,v) \, : \, \operatorname{rg}Df(u,v) = p \} 
+\\ &= \{ (u, \tilde{f}(u,v)) \, : \, D_v \tilde{f} (u,v) = 0\} 
+\end{align*}
+e quindi da \eqref{e:uxf_u(N)}
+\[
+K_u = f(F_u \cap C_p).
+\]
+Dato che, per ogni $u \in U$, $K_u$ ha misura zero, allora per il Lemma \ref{t:misK0} si ha che $f(C_p)$ ha misura zero.
+
+
+\end{proof}
+ 
+
+
+
+
+Il caso $m=n$ rappresenta un caso particolarmente significativo del Teorema di Morse-Sard \ref{t:misf(c(f))=0}. Lo mettiamo qui in evidenza.
+
+\begin{thm} \label{t:MSnnC1}
+Sia  $f:U\rightarrow \mathbb{R}^n$, con $U$ aperto di $\mathbb{R}^n$, una funzione di classe $C^{1}$. 
+Sia $crit(f) = \{x\in U \, : \, \operatorname{det}Df(x)=0\}$. Allora $f(crit(f))$ ha misura zero in $\mathbb{R}^n$.
+\end{thm}
+
+
+
+Osserviamo che le ipotesi del Teorema di Morse-Sard \ref{t:misf(c(f))=0} sono ottimali. Infatti  Whitney \cite{Whitney} ha pubblicato nel 1935,  
+un  controesempio. 
+%, il quale attesta che nel caso in cui si abbia una funzione $f:\mathbb{R}^m \rightarrow \mathbb{R}$,  con    $f \in C^k(U)$, il Teorema dei Morse-Sard non è valido. 
+ %una funzione da un insieme $I^2 \subset \mathbb{R}^2$ in $I \subset \mathbb{R}$ di classe $C^1$ non costante su un insieme connesso di punti critici. 
+%Per una trattazione completa del controesempio si veda \cite{Whitney}.
+
+\medbreak
+\section{Il Teorema di Morse-Sard: il caso $m< n$}
+
+
+Concludiamo il  capitolo presentando  il Teorema di Morse-Sard nel caso $m<n$, che sarà un corollario del seguente risultato, si veda ad esempio \cite{Narasimhan}.
+
+\begin{thm} \label{t:MSm<n}
+Siano $U\subset \mathbb{R}^m$ un aperto e $f:U \rightarrow \mathbb{R}^n$ una funzione di classe $C^1 (U)$, con $m<n$. Allora
+\[ \operatorname{vol}(f(U)) = 0. \]
+\end{thm} 
+
+\begin{proof}
+Siano $a \in \mathbb{Z}^m$ e $N \in \mathbb{Z}^+$, definiamo
+\[ C(a,N) := \{ x \in \mathbb{R}^m \, : \, |Nx_i - a_i|\le \frac{1}{2}, i=1,2,...,m  \} \]
+il cubo $m$-dimensionale chiuso centrato in $\displaystyle \frac{a}{N}$ e di lato $\displaystyle \frac{1}{N}$.
+
+Definiamo la famiglia
+\[ \mathcal{Q} := \{ C(a,N) \, : \, a \in \mathbb{Z}^m, \  N \in \mathbb{N} \setminus \{0\} \}\]
+e osserviamo che $\mathcal{Q}$ è numerabile e le sue sottofamiglie formate dai cubi di lato $\frac{1}{N}$ sono ricoprimenti chiusi e localmente finiti di $\mathbb{R}^m$.
+
+L'insieme $U$ è l'unione $\cup_{k \in J} C_k$ degli elementi della famiglia $ \{ C_k := C(a_k, N_k) \, : \, C_k \subset U\}$, dove $J \subseteq \mathbb{N}$.
+
+%Consideriamo $\mathcal{S}$ sottofamiglia di $\mathcal{Q}$ tale che
+%\[  S := \{ C \in \mathcal{Q} \, : \, C \text{ ha lato } \frac{1}{N} \}\]
+%e si ha che $\mathcal{S}$ è un ricoprimento chiuso e localmente finito di $\mathbb{R}^m$.
+%Definendo
+%\[ \mathcal{S}_{U} := \{ C \in S \, : \, C \subseteq U \} \]
+%osserviamo che $S_U$ è numerabile e quindi lo possiamo indicare con
+%\[ \mathcal{S}_U = \{ C_n \, : \, n \in \mathbb{N} \}. \]
+%
+%$\mathcal{S}_U$ è un ricoprimento compatto e localmente finito di $U$.
+
+%Quindi
+%\[
+ %U = \cup_{k \in \mathbb{N}} C_k
+%\]
+%e dunque
+Allora
+\begin{equation} \label{e:fUUfC_n}
+f(U) = \cup_{k \in J} f(C_k).
+\end{equation}
+
+Siccome per ogni $k \in \mathbb{N}$ $C_k$ è compatto, anche $f(C_k)$ è compatto, e quindi $f(C_k)$ è misurabile secondo Lebesgue.
+
+Fissiamo $p \in \mathbb{N}$. $f$ è di classe $C^1(U)$ quindi $f$ è localmente lipschitziana, cioè:
+\[ \exists \, L_p > 0 \, : \, \|f(x_1) - f(x_2)\| \le L_p \|x_1 - x_2\|, \quad \forall \, x_1, x_2 \in C_p.\]
+
+Sia $E \subset C_p$ con $\operatorname{diam}(E) = \delta$, allora vale
+\begin{equation} \label{e:fx1x2Ln}
+ \|f(x_1) - f(x_2) \| \le L_p \| x_1 - x_2 \| < \delta L_p, \quad \forall \  x_1, x_2 \in E,
+\end{equation}
+quindi $f(E)$ è contenuto in una palla di raggio $L_p \delta$, ed è cioè contenuto in un cubo di lato $2 L_p \delta$.
+
+Osserviamo ora che $C_p$ è unione di $N^m$ cubi $m$-dimensionali di lato $\frac{1}{N N_p}$ dove $\frac{1}{N_p}$ è il lato di $C_p$, siano essi $\{ K_1, K_2,..., K_{N^m} \}$,
+\begin{equation} \label{e:CnUBi}
+C_p = \cup_{i=1}^{N^m} K_i.
+\end{equation}
+
+Allora, per \eqref{e:fx1x2Ln}, $f(K_i)$ è contenuto in un cubo di lato $2 L_p \frac{\sqrt{m}}{N N_p}$, e per \eqref{e:CnUBi}, $f(C_p)$ è contenuto nell'unione di $N^m$ cubi $n$-dimensionali di lato $2 L_p \frac{\sqrt{m}}{N N_p}$, siano essi $\{D_1, D_2,..., D_{N^m} \}$,
+\begin{equation} \label{e:fCnUDi}
+f(C_p) \subset \cup_{i=1}^{N^m} D_i.
+\end{equation}
+Per \eqref{e:fCnUDi} si ha
+\begin{align*}
+0 &\le \operatorname{vol}(f(C_p)) \le \sum_{i = 1}^{N^m} \operatorname{vol}(D_i)  \\ &=  \sum_{i=1}^{N^m} \left (\frac{2 L_p \sqrt{m}}{N N_p} \right)^n = N^m \left (\frac{2 L_p \sqrt{m}}{N N_p} \right)^n \\ &= \frac{2^n (L_p)^n m^{\frac{n}{2}}}{N_p^{n}} N^{m-n}.
+\end{align*}
+
+
+Osserviamo ora che
+\[ \lim_{N \rightarrow +\infty} \frac{2^n (L_p)^n m^{\frac{n}{2}}}{N_p^{n}} N^{m-n} = 0\]
+risulta che $\operatorname{vol}(f(C_p)) = 0$.
+
+Abbiamo quindi dimostrato che per ogni $k \in J$ si ha che $\operatorname{vol}(f(C_k)) = 0$.
+
+Per \eqref{e:fUUfC_n} si ha la tesi.
+\end{proof}
+
+
+Come conseguenza del Teorema \ref{t:MSm<n} si ha il Teorema di Morse-Sard nel caso $m<n$.
+
+\begin{cor} [Teorema di Morse-Sard nel caso m<n] \label{t:MSm<n2}
+Siano $U\subset \mathbb{R}^m$ un aperto e $f:U \rightarrow \mathbb{R}^n$ una funzione di classe $C^1 (U)$, con $m<n$. Sia $crit(f) = \{x \in U \, : \, Df(x) \text{ non ha rango massimo} \}$. Allora $f(crit(f))$ ha misura zero in $\mathbb{R}^n$.
+\end{cor}
+
+\begin{proof}
+$crit(f) \subset U$ per definizione.
+
+\noindent
+Per il Teorema \ref{t:MSm<n} si ha che $\operatorname{vol}(f(U))=0$.
+
+\noindent
+Osservando che $f(crit(f)) \subset f(U)$, si ha la tesi.
+\end{proof}
+
+
+
+
+\chapter{Il lemma di Sard per funzioni differenziabili}
+\label{cap:3}
+
+Per il Teorema  \ref{t:misf(c(f))=0} di Morse-Sard, nel caso $n=m$, si ha:  
+
+\medbreak
+
+{\em Se $f:U\rightarrow \mathbb{R}^n$, con $U$ aperto di $\mathbb{R}^n$, una funzione di classe $C^{1}$. }
+
+{\em Allora   $f(crit(f))$ ha misura zero in $\mathbb{R}^n$, dove  \[crit(f) := \{x\in U \, : \, \operatorname{det}Df(x)=0\}.\]}
+
+\medbreak
+
+Nel 1966 Varberg \cite{Varberg} ha dimostrato che è sufficiente richiedere la differenziabilità di $f$. Oggetto di questo  capitolo è la presentazione di questo risultato, con dimostrazione. 
+
+
+
+
+\section{I ricoprimenti di Vitali}
+
+Iniziamo enunciando alcuni risultati preliminari, tra cui un teorema di ricoprimento di tipo Vitali.
+
+
+
+
+\begin{defn}
+Sia  $E\subseteq \mathbb{R}^n$. Sia $\mathcal{K}$ la famiglia dei cubi di $\mathbb{R}^n$ contenente $E$. 
+Chiamiamo {\em parametro di regolarità di $E$} la seguente quantità
+\[r(E)=\inf_{K\in \mathcal{K}}\frac{\operatorname{vol}(E)}{\operatorname{vol}(K)}.\]
+\end{defn}
+
+\begin{defn}
+ Diciamo che una successione $(E_n)_{n \in \mathbb{N}}$ di sottoinsiemi di  $\mathbb{R}^n$ è {\em regolare} se
+esiste un numero positivo $a$ tale che \[r(E_n) > a\qquad \forall n\in \mathbb{N}.\]
+\end{defn}
+
+\begin{defn}
+ Diciamo che una successione $(E_n)_{n \in \mathbb{N}}$ di sottoinsiemi di  $\mathbb{R}^n$ è convergente  a $x\in \mathbb{R}^n$ se $x\in E_n$ per ogni $n$ e 
+$\operatorname{diam}(E_n)\to 0$ per $n\to +\infty$.
+\end{defn}
+
+
+\begin{defn}\label{d:ricvitali}
+Sia $E \subset \mathbb{R}^n$. Diciamo che una famiglia $\mathcal{F}$ di insiemi di $\mathbb{R}^n$   è un {\em ricoprimento nel senso di  Vitali} di $E$ se per ogni $x \in E$ esiste un successione regolare $(E_n)_{n \in \mathbb{N}}$ di elementi di $\mathcal{F}$ convergente a $x$.
+\end{defn}
+
+
+
+\begin{thm}[Teorema di ricoprimento di Vitali] \label{t:ricvitali}
+Sia $E \subset \mathbb{R}^n$. Sia  $\mathcal{C}$ una famiglia di insiemi chiusi di $\mathbb{R}^n$. 
+Se $\mathcal{C}$ è un ricoprimento di Vitali di $E$, allora esiste una sottofamiglia  numerabile o finita di elementi di $\mathcal{C}$, sia essa $\{E_i\}_{i \in I}$,  a due a due disgiunti, tale che
+\[
+\operatorname{vol}(E \setminus \cup_{i \in I} E_i) = 0.
+\]
+\end{thm}
+ Rimandiamo a 
+ \cite{Saks} per una dimostrazione. 
+
+
+\section{Alcune disuguaglianze geometriche}
+
+Vediamo in questa sezione alcune disuguaglianze geometriche che saranno poi utili nella sezione successiva.
+
+\noindent
+Se $E\subseteq \mathbb{R}^n$ indicheremo col simbolo $\mu^*(E)$ 
+la sua misura esterna secondo Lebesgue.
+
+\begin{defn}
+Un cubo   $C\subset \mathbb{R}^n$ si dice  {\em  orientato} se ha  i lati paralleli agli assi coordinati.
+ \end{defn}
+
+
+\begin{lem} \label{t:volG2nd}
+Sia $F \subset \mathbb{R}^n$ contenuto in un iperpiano $H$, sia $x_0\in F$ e $d>0$ tale che  $\| x- x_0 \| \le d$ per ogni $x \in F$. Sia 
+\[
+G:=\{ x \in \mathbb{R}^n \, : \, d(x,F) < \delta \}.
+\]
+Allora $G$ è misurabile e vale
+\[
+\operatorname{vol}(G) \le 2^n(d+\delta)^{n-1} \delta.
+\]
+\end{lem}
+
+Per la dimostrazione del Lemma \ref{t:volG2nd} rimandiamo a \cite{flett}.
+
+
+\begin{lem} \label{t:volQdeth}
+Sia $h:\mathbb{R}^n \rightarrow \mathbb{R}^n$ un'applicazione lineare, sia
+\[ C:= \{ (x_1, x_2,..., x_n) \in \mathbb{R}^n  \, : \, 0 \le x_i \le 1, i=1,2,...,n\} \]
+il cubo unitario e poniamo $P = h(C)$. Sia
+\[ Q := \{ x \in \mathbb{R}^n \, : \, d(x, P) < \delta \}. \]
+Allora $Q$ è misurabile ed esiste una costante $A(n) > 0$ dipendente da $n$ tale che
+\[ \operatorname{vol}(Q) \le |\operatorname{det}\,h|  + A(n)(\|h\| + \delta)^{n-1} \delta. \]
+\end{lem}
+
+\begin{proof}
+$Q$ è aperto quindi $Q$ è misurabile.
+
+\noindent
+Il primo caso è $\operatorname{det}\,h = 0$.
+In questo caso esiste un iperpiano $H$ di $\mathbb{R}^n$ tale che $P \subset H$.
+
+Sia $v_0 \in C$ il centro del cubo, allora, per ogni $v \in C$
+\begin{equation} \label{e:lehsqrtn}
+\| h(v) - h(v_0) \| = \| h(v - v_0) \| \le \| h \| \| v- v_0\| \le \| h \| \frac{1}{2} \sqrt{n}.
+\end{equation}
+
+Siccome $P = h(C)$, ponendo $x_0 = h(v_0)$ si ha da \eqref{e:lehsqrtn} che per ogni $x \in P$
+\[ \| x - x_0 \| \le \|h \| \frac{1}{2} \sqrt{n}. \]
+Quindi, applicando il Lemma \ref{t:volG2nd} con $F=P$ e $d = \frac{1}{2} \|h\| \sqrt{n}$, si ha
+
+\[ \operatorname{vol}(Q) \le 2^n(\frac{1}{2} \sqrt{n} \|h\| + \delta)^{n-1} \delta \le A(n)(\|h\| + \delta)^{n-1} \delta \]
+Da cui la tesi.
+
+Il secondo caso è il caso in cui $\operatorname{det} \, h \neq 0.$
+In questo caso $P$ è un parallelepipedo $n$-dimensionale di misura
+\[ \operatorname{vol}(P) = |\operatorname{det} \, h| \operatorname{vol}(C) = |\operatorname{det} \, h|.\]
+$P$ è compatto, quindi per ogni $y \in Q \setminus P$ esiste un $x \in P$ tale che 
+\[ \|y-x\| = d(y, P) \]
+in particolare $x$ sta almeno in una faccia $(n-1)$-dimensionale di $P$.
+
+Osserviamo che ogni faccia di $P$ è immagine tramite $h$ di una faccia di $C$, quindi presa $B$ una faccia di $C$ si ha $h(B) \subset H$, con $H$ iperpiano di $\mathbb{R}^n$, e preso $x_0 \in h(B)$ il suo centro, vale, per ogni $x \in h(B)$
+\[
+ \| x - x_0 \| \le \frac{1}{2} \sqrt{n-1} \|h\|.
+\]
+
+Definiamo $E := \{x \in \mathbb{R}^n \, : \, d(x, h(B)) < \delta \}$ e applicando il Lemma \ref{t:volG2nd} con $F=h(B)$ e $d=\frac{1}{2} \sqrt{n-1} \|h\|$ vale
+
+\begin{equation} \label{e:volE}
+ \operatorname{vol}(E) \le 2^n (\frac{1}{2} \sqrt{n-1} \|h\| + \delta)^{n-1} \delta \le A'(n)(\|h\| + \delta)^{n-1} \delta
+\end{equation}
+dove $A'(n)$ è una costante positiva dipendente da $n$.
+
+$C$ ha $2n$ facce $(n-1)$-dimensionali, siano esse $\{B_1, B_2,..., B_{2n}\}$, definiamo
+\begin{equation} \label{e:defE_i}
+E_i := \{ x \in \mathbb{R}^n \, : \, d(x, h(B_i))<\delta \}
+\end{equation}
+e quindi si ha
+\begin{equation} \label{e:Q-P=UE_i}
+Q\setminus P \subseteq  \cup_{i=1}^{2n} E_i.
+\end{equation} 
+Quindi, da \eqref{e:volE}, \eqref{e:defE_i} e \eqref{e:Q-P=UE_i} vale
+\begin{equation} \label{e:volQ-P}
+\operatorname{vol}(Q \setminus P) \le \sum_{i=1}^{2n} \operatorname{vol}(E_i) \le 2n(A'(n)(\|h \| + \delta)^{n-1} \delta) \le A(n)((\|h\| + \delta)^{n-1} \delta
+\end{equation}
+dove abbiamo definito $A(n) := 2n A'(n)$.
+
+Dato che $Q=P \cup (Q \setminus P)$,  da \eqref{e:volQ-P} si ha
+\[
+\operatorname{vol}(Q) = \operatorname{vol}(P) + \operatorname{vol}(Q \setminus P) \le |\operatorname{det} \,h| + A(n)(\|h\| + \delta)^{n-1}\delta.
+\]
+Da cui la tesi.
+\end{proof}
+
+
+
+
+
+
+
+Dal Lemma \ref{t:volQdeth}, ricalcando la dimostrazione, segue immediatamente il seguente
+
+\begin{lem} \label{t:volQvolC}
+Sia $C$ un cubo chiuso e orientato di $\mathbb{R}^n$ di lato $\alpha$ e sia $h:\mathbb{R}^n \rightarrow \mathbb{R}^n$ un'applicazione lineare.
+Sia
+\[ Q:=\{ x \in \mathbb{R}^n \, : \, d(x, h(C)) < \alpha \delta \} \]
+allora $Q$ è misurabile ed esiste una costante $A(n) >0$ dipendente da $n$ tale che
+\[ \operatorname{vol}(Q) \le \operatorname{vol}(C) (|\operatorname{det} \, h| + A(n)(\|h\| + \delta)^{n-1} \delta). \] 
+\end{lem}
+
+
+
+
+
+
+
+%
+%Applicando il Lemma \ref{t:volQvolC} alla matrice Jacobiana di una funzione differenziabile calcolata in un punto si ottiene il seguente
+%
+%\begin{lem} \label{t:mf(c)J(x)}
+%Sia $C$ un cubo chiuso e orientato di $\mathbb{R}^n$ con centro in $x_0$, sia $f:C \rightarrow \mathbb{R}^n$ una funzione differenziabile. Allora esiste una costante $A(n)>0$ dipendente da $n$ tale che
+%\[
+%\mu^*(f(C)) \le \operatorname{vol}(C) (|\operatorname{det}(Df(x_0))| + A(n)(\|Df(x_0)\| + \eta)^{n-1} \eta)
+%\]
+%dove $\eta = \sup_{x \in C}\|Df(x) - Df(x_0)\|.$
+%\end{lem}
+%
+%\begin{proof}
+%Denotiamo con $\alpha$ il lato di $C$ e poniamo $P = Df(x_0)(C)$.
+%Applicando il Teorema della media integrale alla funzione $f - Df(x_0)$ si ha
+%\begin{equation} \label{e:f-fx_0aneta}
+%\| f(x) - f(x_0) -Df(x_0) (x - x_0) \| \le \eta \|x - x_0\| < \eta \alpha \sqrt{n}, \quad \forall \, x \in C.
+%\end{equation}
+%Definiamo la funzione $f_{x_0} : \mathbb{R}^n \rightarrow \mathbb{R}^n$, $f_{x_0} (x) := f(x) - f(x_0) +Df(x_0)(x_0)$.
+%
+%Da \eqref{e:f-fx_0aneta} si ha 
+%\[ 
+%\|f_{x_0}(x) - Df(x_0)(x) \| < \eta \alpha \sqrt{n}, \quad \forall \, x \in C
+%\]
+%e quindi definito
+%\[ Q = \{ x \in \mathbb{R}^n \, : \, d(x, P) < \eta \alpha \sqrt{n} \} \]
+%si ha
+%\[
+%f_{x_0} (C) \subset Q.
+%\]
+%
+%Osservanod che $\mu^*(f_{x_0}(C)) =  \mu^*(f(C))$ e applicando il Lemma \ref{t:volQvolC} si ottiene la tesi.
+ %\end{proof}
+ 
+
+
+
+
+\section{Il teorema di Varberg}
+  
+In questo paragrafo dimostriamo la versione del  Teorema di Morse-Sard per funzioni differenziabili da un aperto di $\mathbb{R}^n$ a $\mathbb{R}^n$.
+
+Per dimostrarlo, necessitiamo di alcuni risultati preliminari. 
+
+
+
+
+\begin{lem}  \label{t:volfN=0}
+Sia $D$ un aperto di $\mathbb{R}^n$, sia $N \subset D$ un insieme di misura nulla e $f:D \rightarrow \mathbb{R}^n$ una funzione differenziabile su $N$. Allora
+\[
+\operatorname{vol}(f(N)) = 0.
+\]
+\end{lem}
+
+\begin{proof}
+Definiamo per ogni $j,k \in \mathbb{Z}^+
+$
+\begin{equation} \label{e:defNjk}
+N_{j,k} = \{ x \in N \, : \, \| f(x+t) - f(x) \| \le j \|t\|, \, \forall \, t \text{ t.c.} \ x+t\in D, \|t\| \le \frac{1}{k} \}.
+\end{equation}
+
+Mostriamo che $N = \cup_{j,k} N_{j,k}$. E' sufficiente dimostrare che $N \subseteq  \cup_{j,k} N_{j,k}$.
+
+Sia $x\in N$. Dato che $f$ è differenziabile su $x$ si ha
+\[
+ \|f(x+t) - f(x)-   Df(x)t \| \le \eta(x+t) \|t\| 
+\]
+con $\eta(x+t)\to 0$ se $t\to 0$. Allora, 
+ esiste $k\in \mathbb{Z}^+$ tale che 
+$|\eta(x+t)|<1$ per $\|t\|\le \frac{1}{k}$.
+Pertanto, prendendo $j\ge \|Df(x)\|+1$ si ha 
+\[
+ \|f(x+t) - f(x) \|\le \|f(x+t) - f(x)-   Df(x)t \|+\|Df(x)t\|  \le j\|t\| 
+\]
+per ogni $t$ tale che $x+t\in D$, $\|t\|\le \frac{1}{k}$, ossia $x\in N_{j,k}$. 
+
+Abbiamo quindi dimostrato che se $x \in N$ allora esistono $j,k \in \mathbb{Z}^+$ tale che $x \in N_{j,k}$.
+Quindi 
+\begin{equation} \label{e:NUNjk}
+N = \cup_{j,k} N_{j,k}.
+\end{equation}
+Fissiamo $\epsilon>0$ e consideriamo  $N_{j,k}$. Essendo  $N_{j,k}\subset N$ è 
+\begin{equation} \label{e:volNjk=0}
+\operatorname{vol}(N_{j,k}) = 0.
+\end{equation}
+Mostriamo che $\operatorname{vol}(f(N_{j,k})) = 0$.
+Per  \eqref{e:volNjk=0}  possiamo scegliere una successione di cubi $n$-dimensionali $\{V_i\}_{i \in I}$ dove $V_i$ è centrato in un punto $v_i$ con lato $2b_i$ di modo che
+\begin{equation} \label{e:bi<nk}
+b_i \le  \frac{1}{nk} 
+\end{equation}
+e tale che
+\begin{equation} \label{e:Njkprop}
+N_{j,k} \subset \cup_{i \in I} V_i \text{ e } \sum_{i \in I} \operatorname{vol}(V_i) < \epsilon. 
+\end{equation}
+
+Per \eqref{e:bi<nk}, si ha 
+\[ 
+\| v - v_i \| < nb_i \le \frac{1}{k}, \quad \forall \, v \in V_i \cap N_{j,k}
+\]
+quindi da \eqref{e:defNjk} 
+\begin{equation} \label{e:fvv_i<jbi}
+\|f(v) - f(v_i) \| \le j \|v - v_i \| \le j n b_i.
+\end{equation}
+
+Quindi, da \eqref{e:fvv_i<jbi}, $f(V_i \cap N_{j,k})$ è contenuto in un cubo $n$-dimensionale di centro $f(v_i)$ e lato $2 j n b_i$, da cui segue
+\begin{equation} \label{e:mufvolVi}
+\mu^*(f(V_i \cap N_{j,k})) \le (2 j n b_i)^n = (jn)^n \operatorname{vol}(V_i).
+\end{equation}
+
+Da \eqref{e:Njkprop} e \eqref{e:mufvolVi} si ha
+\begin{align*}
+\mu^*(f(N_{j,k})) &= \mu^*(\cup_{i \in I} f(V_i \cap N_{j,k})) \le \sum_{i \in I} \mu^*(f(V_i \cap N_{j,k}) \\ &\le (jn)^n \sum_{i \in I} \operatorname{vol}(V_i) \le (jn)^n \epsilon.
+\end{align*}
+
+Per l'arbitrarietà di $\epsilon$ si ha 
+\[
+\operatorname{vol}(f(N_{j,k})) = 0.
+\]
+
+Da \eqref{e:NUNjk} segue che $f(N) = \cup_{j,k} f(N_{j,k})$ e quindi si ha la tesi.
+\end{proof}
+ 
+
+
+
+\begin{lem} \label{t:muf(E)K}
+Siano $D$ un aperto di $\mathbb{R}^n$ e  $E\subseteq D$. 
+Sia $f:D \rightarrow \mathbb{R}^n$ una funzione differenziabile 
+in  $E$ tale che 
+\begin{equation}\label{e:ipotesi} \sup_{x\in E}|\operatorname{det}Df(x)| \le K\end{equation}
+con $K$ costante positiva. Allora
+\[
+\mu^*(f(E)) \le K \mu^*(E).
+\]
+\end{lem}
+
+\begin{proof}
+Se $\mu^*(E)=\infty$ la tesi è ovviamente verificata. 
+
+Supponiamo  $\mu^*(E)<\infty$. Sia $\epsilon > 0$ e sia  $A \subset D$ aperto  tale che $E \subset A$ e  \begin{equation}\label{e:varberg2.2bis}\operatorname{vol}(A) \le \mu^*(E) + \epsilon.\end{equation}
+
+Mostriamo che per ogni $x \in E$ esiste un cubo chiuso $n$-dimensionale orientato e centrato in $x$, sia esso $E_x$, tale che $E_x \subset A$ e 
+\begin{equation} \label{e:mf(E_x)}
+\mu^*(f(E_x)) \le (K + \epsilon) \operatorname{vol}(E_x).
+\end{equation}  
+
+Sia $x \in E$; siccome $f$ è differenziabile in $x$   vale la seguente
+\[
+\|f(y) - f(x) - Df(x)(y- x) \| \le   \eta(y) \|y- x \|
+\]
+dove $\eta(y) \rightarrow 0$ per $y \rightarrow x$.
+
+Sia $E_{x}\subseteq D$ un cubo chiuso orientato $n$-dimensionale centrato in $x$ e sia $\alpha$ il suo lato. 
+Allora 
+\begin{equation} \label{e:f-fx_0aneta}
+\|f(y) - f(x) - Df(x)(y- x) \| \le   \eta(y) \alpha \sqrt{n}, \quad \forall \, y \in E_{x}.
+\end{equation}
+Definiamo la funzione $f_{x} : \mathbb{R}^n \rightarrow \mathbb{R}^n$, $f_{x} (y) := f(y) - f(x) +Df(x)(x)$.
+
+Da \eqref{e:f-fx_0aneta} si ha 
+\[ 
+\|f_{x}(y) - Df(x)(y) \| < \eta(y) \alpha \sqrt{n}, \quad \forall \, y \in E_x.
+\]
+Sia $P=Df(x)(E_x)$ e sia
+\[ Q := \{ y \in \mathbb{R}^n \, : \, d(y, P) < \eta(y) 
+\alpha \sqrt{n} \}. \]
+Si ha
+\[
+f_{x} (E_x) \subset Q.
+\]
+Osservando che $\mu^*(f_{x}(E_x)) =  \mu^*(f(E_x))$ e applicando il Lemma \ref{t:volQvolC} si ottiene che   esiste una costante $A(n)>0$ dipendente da $n$ tale che
+\begin{equation} \label{e:mf(Ex)J(x)}
+\mu^* (f(E_x)) \le \operatorname{vol}(E_x) \{ |\operatorname{det}Df(x)| + A(n)(\|Df(x)\| + \eta)^{n-1} \eta \}
+\end{equation}
+con $\eta:=\sup_{y\in E_x}\eta(y)$. 
+  
+Dato che $\eta(y) \rightarrow 0$ per $y \rightarrow x$ possiamo scegliere un cubo $E_{x}$ abbastanza piccolo tale che $A(n)(\|Df(x)\| + \eta)^{n-1} \eta < \epsilon$. Quindi,  per \eqref{e:ipotesi} e \eqref{e:mf(Ex)J(x)}, 
+\[
+\mu^*(f(E_x)) \le (K + \epsilon) \operatorname{vol}(E_x).
+\]
+Ciò dimostra  \eqref{e:mf(E_x)}.
+
+Sia ora 
+\[
+\mathcal{F}_x := \{E_x \, : \, E_x \text{ cubo chiuso orientato centrato in $x$},\  E_x \subset A \text{ e } E_x \text{ soddisfa } \eqref{e:mf(E_x)}\}
+\]
+e definiamo
+\[
+\mathcal{F}:= \cup _{x \in E} \mathcal{F}_x.
+\]
+
+Osserviamo ora che $\mathcal{F}$ è un ricoprimento di Vitali di $E$, vedi Definizione \ref{d:ricvitali}, soddisfacente le ipotesi del  Teorema \ref{t:ricvitali}. Allora esiste una collezione numerabile o finita di elementi di $\mathcal{F}$, sia essa  $\{E_1, E_2, ...\}$,  a due a due disgiunti, tali che 
+\[
+\operatorname{vol}(E \setminus \cup_{i}E_i) = 0.
+\]
+
+\noindent
+Sia $N:=E \setminus \cup_{i} E_i$. Allora si ha che $f(E) \subseteq   f(\cup_{i} E_i)\cup f(N)$ 
+e quindi
+\begin{equation} \label{e:volf(E)f(N)}
+\mu^*(f(E)) \le \mu^*(f(\cup_{i} E_i)) + \mu^*(f(N))\le \sum_{i} \mu^* (f(E_i))+ \mu^*(f(N)).
+\end{equation}
+
+Dal Lemma \ref{t:volfN=0} si ha che $\mu^* (f(N)) = 0$ e da \eqref{e:volf(E)f(N)} si ha
+\begin{equation} \label{e:volf(E)<m*f}
+\mu^*(f(E)) \le \sum_{i} \mu^* (f(E_i)).
+\end{equation}
+
+\noindent
+Quindi da \eqref{e:volf(E)<m*f}, \eqref{e:mf(E_x)} e  \eqref{e:varberg2.2bis} si ha
+
+\begin{align*}
+\mu^*(f(E)) &\le  \sum_{i} \mu^* (f(E_i))\le \sum_{i} (K + \epsilon) \operatorname{vol}(E_i) \\ &= (K + \epsilon) \operatorname{vol}(\cup_{i} E_i)   \le (K + \epsilon) \operatorname{vol}(A) \\ &\le (K + \epsilon)(\mu^*(E) + \epsilon).
+\end{align*}
+
+Per l'arbitrarietà di $\epsilon$ si ha la tesi.
+
+\end{proof}
+
+ Come conseguenza  del Lemma \ref{t:muf(E)K} si ha 
+che l'immagine dei punti singolari di una funzione differenziabile $f:D \rightarrow \mathbb{R}^n$, con $D$ un aperto di $\mathbb{R}^n$, ha misura nulla. Più precisamente, 
+vale il seguente risultato.  
+
+\begin{thm}[Varberg \cite{Varberg}]
+Siano $D$ un aperto di $\mathbb{R}^n$ e $E \subset D$. Sia $f:D \rightarrow \mathbb{R}^n$ una funzione differenziabile su $E$ e tale che
+\[ 
+\operatorname{det}Df(x) = 0,  \quad \forall x \in E.
+\] 
+Allora $\operatorname{vol}(f(E)) = 0.$
+\end{thm}
+
+\begin{proof}
+La dimostrazione segue direttamente dal Lemma \ref{t:muf(E)K} con $K=0$.
+\end{proof}
+ 
+
+
+
+
+
+
+
+
+
+\chapter{Formula di coarea}
+\label{cap:4}
+In questo capitolo diamo una importante applicazione del Teorema  \ref{t:Morse} di Morse per funzioni regolari. Essa è la cosiddetta   {\em formula di coarea} per funzioni a valori reali. 
+
+%\begin{defn}
+%
+%Sia $(X, T)$ uno spazio topologico dotato di topologia $T$. Denotiamo $B(X)$  la $\sigma$-algebra di Borel associata alla topologia $T$, la quale è la più piccola $\sigma$-aglebra.
+%\end{defn}
+%
+%\begin{defn}
+%Siano $X$ e $Y$ due spazi topologici e $B(X)$ e $B(Y)$ le due $\sigma$-algebre associate a $X$ e $Y$ rispettivamente. Sia $f:X \rightarrow Y$ una funzione. Diciamo che $f$ è Borel-misurabile se
+%\[
+%f^{-1}(V) \in B(X) \quad \forall \, V \in B(Y).
+%\]
+%\end{defn}
+%
+%Siano $X$ e $Y$ due spazi topologici e $B(X)$ e $B(Y)$ le due $\sigma$-algebre di Borel associate. Siano $\mu$ e $\nu$ due misure positive $\sigma$-finite sulle $\sigma$-algebre di Borel $B(X)$ e $B(Y)$ rispettivamente, sia inotlre $\mu \otimes \nu$ la misura prodotto di $\mu$ e $\nu$ sulla $\sigma$-algebra di Broel $B(X) \otimes B(Y)$ di $X \times Y$.
+%
+%Sia $E \subset X \times Y$, denotiamo per ogni $x \in X$ e $y \in Y$ 
+%\[ E_x = \{ y \in Y \, : \, (x,y) \in E \}, \quad x \in X \]
+%\[ E^y = \{ x \in X \, : \, (x,y) \in E \}, \quad y \in Y \]
+%le sezioni di $E$ con $x$ e $y$ fissati.
+%
+%Data $f: X \times Y \rightarrow [0, +\infty]$, definiamo per ogni $x \in X$ e $y \in Y$
+%\[ f_x (y)=f(x,y), \quad y \in Y\]
+%\[ f^y (x)=f(x,y), \quad x \in X\]
+%le sezioni di $f$ rispettivamente a $x$ e $y$ fissati.
+%Valgono le seguenti affermazioni
+%
+%(a) $B(X) \otimes B(Y) = B(X \times Y)$;
+%
+%(b) per ogni omeomorfismo $\Phi:X \rightarrow Y$ di $X$ su $Y$ vale
+%\[ \Phi(B(X)) = B(Y) \]
+%
+%(c) se $E \in B(X \times Y)$ si ha
+%\[E_x \in B(Y), \quad \forall x \in X \]
+%\[E^y \in B(X), \quad \forall y \in Y \]
+%
+%\noindent
+%Inoltre se $f: X \times Y \rightarrow [0, +\infty]$ è una funzione $B(X \times Y)$-misurabile si ha
+%
+%(d) $f_x$ è $B(Y)$-misurabile per ogni $x \in X$ e $f^y$ è $B(X)$-misurabile per ogni $y \in Y$
+%
+%(e) le funzioni definite da
+%\[ \varphi(x) = \int_{Y} f_x(y) \, d\nu(y), \quad x \in X \]
+%\[ \psi(y) = \int_{X} f^y (x) \, d\mu(x), \quad y \in Y\]
+%
+%sono $B(X)$-misurabile e $B(Y)$-misruabile rispettivamente
+%
+%(f) Teorema di Tonelli
+%\[ \int_{X} \varphi \, d\mu = \int_{X \times Y} f \, d(\mu \otimes \nu) = \int_{Y} \psi \, d\nu \].
+
+
+\begin{thm}\label{t:celadaT1.10}
+
+Siano $\Omega \subset \mathbb{R}^n$ aperto, $F : \Omega \rightarrow \mathbb{R}$ di classe $C^\infty$. Sia $N = F(C(F))$ l'insieme dei valori critici di $F$ e
+
+\[
+M_t = \{x \in \Omega \, : \, F(x) = t \}, \quad t \in \mathbb{R}.
+\]
+
+Allora, $M_t$ è una $(n-1)$-varietà per ogni $t \in F(\Omega) \setminus N$ e per ogni $f:\Omega \rightarrow [0,+\infty]$   misurabile valgono le seguenti: \\
+
+(a) la funzione $\varphi : \mathbb{R} \rightarrow [0, +\infty]$,
+\[
+\varphi(t) := \left \{ 
+\begin{array}{rr}
+0 \quad \text{ se } t \in (\mathbb{R} \setminus F(\Omega)) \cup N \\ \\ \displaystyle  \int_{M_t} f d\sigma \quad \text{ se } t \in F(\Omega) \setminus N
+\end{array}
+\right.
+\]
+è  misurabile,\\
+
+(b) $\displaystyle \int_{\Omega} f \; \| DF \| \; dx = \int_{\mathbb{R}} \varphi(t) \; dt$.
+\end{thm}
+
+\begin{obs}
+L'uguaglianza (b) in Teorema \ref{t:celadaT1.10} si può scrivere in modo più leggibile:
+\[
+\int_{\Omega} f \| DF \| dx = \int_{0}^{+\infty} \left(\int_{ \{F=t\} } f \; d \sigma \right) dt.
+\]
+Infatti, $N$ ha misura nulla per il Corollario \ref{t:Morse} e, se $t \in \mathbb{R} \setminus F(\Omega)$, 
+allora $M_t$ è l'insieme vuoto.
+\end{obs}
+
+
+\begin{proof}[Dimostrazione del Teorema \ref{t:celadaT1.10}]
+Ci possiamo ridurre al caso $DF \neq 0$ in $\Omega$.
+Infatti, supponiamo di avere dimostrato il teorema con l'ipotesi aggiuntiva di $DF \neq 0$.
+Denotiamo 
+\[
+\Omega' := \Omega \setminus C(F)
+\]
+e, per $t\in \mathbb{R}$, 
+\[
+M_t' := \{x \in \Omega' \, : \, F(x) = t\}.
+\]
+
+Dato che $\Omega'$ è l'insieme dei punti che non sono critici per $f$, allora si ha che $M_t'$ o è una $(n-1)$-varietà oppure è l'insieme vuoto.
+
+
+\noindent
+%Gli insiemi $F(\Omega)$, $F(\Omega')$ e $N$ sono misurabili secondo Borel, e 
+Si ha
+\begin{equation} \label{e:F(Omega)/N}
+F(\Omega) \setminus N \subset F(\Omega') \subset F(\Omega).
+\end{equation}
+
+Inoltre
+
+\begin{equation} \label{e:Mt=Mt'}
+M_t = M_t' \quad \forall \, t \in F(\Omega) \setminus N.
+\end{equation}
+
+La inclusione $M_{t'}\subseteq M_t$ è ovvia. Dimostriamo l'opposta inclusione. Sia 
+$t\in F(\Omega)\setminus N$ e sia 
+$x\in M_t$. Allora   $x\in \Omega$ e   $F(x)=t$. Essendo  $t\not\in  N$ 
+sarà $DF(x)\ne 0$, da cui $x\in \Omega\setminus C(F)$. 
+Ciò dimostra che $x\in M'_t$.
+
+D'altra parte, è banalmente verificato che
+\begin{equation} \label{e:Mt=Mt'=0}
+M_t = M_t' = \emptyset \quad \forall \; t \notin F(\Omega).
+\end{equation}
+
+
+
+
+
+Da \eqref{e:F(Omega)/N}, \eqref{e:Mt=Mt'}, \eqref{e:Mt=Mt'=0} e tenendo conto del fatto che, per la Proposizione  \ref{t:morseRn}, $N$ ha misura zero, si ha
+\[
+M_t = M_t' \quad \text{per q.o.} \  t \in \mathbb{R}.
+\]
+
+Osserviamo ora che 
+\[
+F(\Omega') \cap N \subset N, 
+\]
+quindi $F(\Omega') \cap N$ è un insieme di misura nulla.
+Definiamo la funzione $\psi : \mathbb{R} \rightarrow [0,+\infty]$ la funzione
+ misurabile
+
+\begin{equation} \label{e:defpsi}
+\psi(t) =\left \{ \begin{array}{ll}
+0 & t \in \mathbb{R} \setminus F(\Omega') \\ \\
+\displaystyle \int_{M_t'}f \; d\sigma & \text{altrimenti.}
+\end{array} \right.
+\end{equation}
+
+Su $F(\Omega') \cap N$ $\varphi$ è nulla. Anzi, vale di più:
+\begin{equation} \label{e:Ieq-varphi=0}
+\varphi(t) = 0 \quad \forall \, t \in  N.
+\end{equation}
+%Più in generale,  per definizione di $\varphi$, si ha 
+%\begin{equation} \label{e:IIeq-varphi=0}
+%\varphi(t) = 0 \quad \forall \, t \in  N.
+%\end{equation}
+
+Per \eqref{e:F(Omega)/N} si ha
+\begin{align*}
+t \in \mathbb{R} \setminus F(\Omega') &\subset \mathbb{R} \setminus (F(\Omega)\setminus N)   \\
+&=(\mathbb{R} \setminus F(\Omega)) \cup (F(\Omega) \cap N) \\
+&\subseteq (\mathbb{R} \setminus F(\Omega)) \cup N. 
+\end{align*}
+Quindi, per definizione di $\varphi$ e di $\psi$ si ha 
+\begin{equation} \label{e:IIeq-varphi=0}
+\varphi(t) = \psi(t)=0 \qquad \text{per ogni } t \in \mathbb{R} \setminus F(\Omega').
+\end{equation}
+
+Mostriamo ora che $\varphi(t) = \psi(t)$ per ogni $t \in (F(\Omega') \cap N)^c$.
+%
+%\noindent
+%Consideriamo $t \in (F(\Omega') \cap N)^c$, cioè $t \in F(\Omega')^c \cap N^c$. Abbiamo quindi tre casi possibili:
+%
+%\begin{equation} \label{e:caso(i)}\left \{
+%\begin{array} {l}
+%t \in F(\Omega')^c \\ \\
+%t \notin N^c
+%\end{array} \right.
+%\end{equation}
+%
+%\begin{equation} \label{e:caso(ii)}\left \{
+%\begin{array} {l}
+%t \notin F(\Omega')^c \\ \\
+%t \in N^c
+%\end{array} \right.
+%\end{equation}
+%
+%\begin{equation} \label{e:caso(iii)}\left \{
+%\begin{array} {l}
+%t \in F(\Omega')^c \\ \\
+%t \in N^c
+%\end{array} \right.
+%\end{equation}
+%
+%Consideriamo il caso \eqref{e:caso(i)} e quindi $t \in F(\Omega')^c$.
+%In tal caso, per \eqref{e:defpsi} si ha che 
+%\[
+%\psi(t) = 0.
+%\]
+%Inoltre, per \eqref{e:F(Omega)/N}
+%\begin{align*}
+%t \in F(\Omega') &\subset (F(\Omega) \setminus N)^c \\
+%&=(F(\Omega) \cap N^c)^c \\
+%&=F(\Omega)^c \cup N \\
+%&=(\mathbb{R} \setminus F(\Omega)) \cup N 
+%\end{align*}
+%e quindi $t \in (\mathbb{R} \setminus F(\Omega)) \cup N$. Per definizione di $\varphi$ e di $\psi$ si ha 
+%\[
+%\varphi(t) = \psi=0.
+%\]
+%Abbiamo quindi dedotto che
+%\[
+%\psi(t) = \varphi(t) \quad \forall \, t \in F(\Omega')^c, \, t \notin N^c.
+%\]
+
+Se  $t \in  F(\Omega')\setminus N$, allora, per definizione di $\psi$ \eqref{e:defpsi},
+\[
+\psi(t) = \int_{M_t'} f d\sigma\qquad \forall t \in  F(\Omega')\setminus N.
+\]
+Per \eqref{e:F(Omega)/N}, se  $t \in  F(\Omega')\setminus N$ 
+ è anche $t\in F(\Omega)\setminus N$, 
+da cui, per definizione di $\varphi$ e 
+ \eqref{e:Mt=Mt'}, 
+\begin{equation}\label{e:IIIeq-varphi}
+\varphi(t) = \int_{M_t} f d \sigma= \int_{M_t'} f d \sigma\qquad \forall t \in  F(\Omega')\setminus N.
+\end{equation}
+In particolare, essendo 
+\[\mathbb{R}^n\setminus (F(\Omega')\cap  N)= (\mathbb{R}^n\setminus F(\Omega'))\cup  (F(\Omega')\setminus N),\]
+da \eqref{e:IIeq-varphi=0} e \eqref{e:IIIeq-varphi} si ha  
+\begin{equation}\label{e:IVeq-varphi}
+\varphi(t) = \psi(t) \quad \forall \, t \in \mathbb{R}^n\setminus (F(\Omega')\cap  N).
+\end{equation}
+%Essendo $F(\Omega')\cap  N$ un insieme di Borel di misura nulla e $\psi$ una funzione Borel misurabile, allora anche $\varphi$ è Borel misurabile. 
+
+Osserviamo ora che, essendo $\|DF\|=0$ in $\Omega\setminus \Omega'$, si ha 
+ \[
+\int_{\Omega} f(x) \; \|DF(x)\| \,dx=\int_{\Omega'} f(x) \; \|DF(x)\| \,dx.\]
+Per la supposizione fatta circa la validità del teorema nel caso di $\|DF(x)\|\ne 0$ ovunque, 
+ \[ \int_{\Omega'} f(x) \; \|DF(x)\| \,dx=\int_{\mathbb{R}} \psi(t)\,dt. \]
+D'altra parte, per \eqref{e:IVeq-varphi} e  \eqref{e:Ieq-varphi=0},
+\[\int_{\mathbb{R}} \psi(t)\,dt=\int_{\mathbb{R}} \varphi(t)\,dt. 
+\]
+Quindi, collegando le precedenti uguaglianze,
+\[\int_{\Omega} f(x) \; \|DF(x)\| \,dx=\int_{\mathbb{R}} \varphi(t)\,dt. \]
+
+Ciò conclude la dimostrazione che se il teorema è vero sotto l'ipotesi aggiuntiva:  $DF \neq 0$ in $\Omega$ allora 
+il teorema vale anche senza questa ipotesi.
+
+\medbreak
+Resta quindi da dimostrare che il teorema vale sotto l'ipotesi aggiuntiva:  $DF \neq 0$ in $\Omega$. In questo caso $N=\emptyset$ e 
+$M_t$ è una $(n-1)$-varietà per ogni $t\in F(\Omega)$. Inoltre osserviamo che
+\[
+\left \{
+\begin{array}{llll}
+M_t = \emptyset & $se$ \  t \in \mathbb{R} \setminus F(\Omega)  \\ \\
+M_t \neq \emptyset & $se$ \  t \in F(\Omega).
+\end{array} \right.
+\]
+possiamo quindi ridefinire la funzione $\varphi$ nel seguente modo
+\[
+\varphi(t) = \left \{
+\begin{array}{ll}
+0 & $se$ \ M_t = \emptyset \\
+\ &  \qquad\qquad \qquad\qquad \quad t \in \mathbb{R}. \\
+\displaystyle \int_{M_t} f \; d\sigma & $altrimenti$
+\end{array} \right.
+\]
+
+ Consideriamo $x_0 \in \Omega$. Dall'ipotesi fatta su $F$, è  $DF(x_0) \neq 0$. Non è restrittivo supporre che sia l'ultima componente di $DF$ ad essere non nulla. 
+Per questo motivo d'ora in poi distinguiamo l'ultima coordinata dei punti di  $ \mathbb{R}^n$ dalle altre, 
+ossia scriviamo  $x=(\xi,y) \in \mathbb{R}^{n-1} \times \mathbb{R}$. 
+Dunque, consideriamo  $x_0 = (\xi_0, y_0) \in \Omega$ e supponiamo che sia  $D_yF(\xi_0, y_0) \neq 0$. Poniamo inoltre $t_0 = F(\xi_0, y_0)$.
+
+Risolviamo l'equazione
+\begin{equation} \label{e:t=Fxy}
+t = F(\xi,y)
+\end{equation}
+attorno a $F(\xi_0, y_0)=t_0$ ricavando $y$ in funzione di $\xi$ e $t$.
+
+Per il teorema della funzione implicita esistono \\
+
+\noindent
+(a) $V$ intorno di $\xi_0$ e $\rho >0$ tali che
+
+	(a1) $V \times I \subset \Omega$ con $I=]y_0 - \rho, y_0 + \rho[$;
+	
+	(a2) $D_yF(\xi,y) \neq 0$ per $(\xi,y) \in V \times I$;\\
+
+\noindent
+(b)  $\epsilon > 0$ e $G \in C^{\infty}(V \times J)$ con $J = ]t_0 - \epsilon, t_0 + \epsilon[$ tali che
+
+	(b1) $G(\xi,t) \in I$ per ogni $(\xi,t) \in V \times J$;
+	
+	(b2) $F(\xi,G(\xi,t)) = t$ per ogni $(\xi,t) \in V \times J$;
+	
+	(b3) per ogni $(\xi,t) \in V \times J$, l'unica soluzione di \eqref{e:t=Fxy} è $y = G(\xi,t)$
+	
+	(b4)  per ogni $(\xi,t) \in V \times J$ \[D_\xi G(\xi,t) = - \frac{1}{D_yF(\xi, G(\xi,t))} D_\xi F(\xi, G(\xi,t)).\]
+
+
+Poniamo
+\[
+W := \{ (\xi, G(\xi,t)) \, : \, \xi \in V, \ t \in J \};
+\]
+per (b1) si ha
+\[
+W \subset V \times I.
+\]
+
+Definiamo la funzione $\Phi: V \times J \rightarrow W$, $\Phi \in C^\infty(V \times J, \mathbb{R}^n)$
+\[
+\Phi (\xi,t) := (\xi, G(\xi,t)), \quad (\xi,t) \in V \times J.
+\]
+
+Sia $(\xi,t) \in V \times J$, allora
+
+\begin{equation} \label{e:DPhixt}
+D\Phi(\xi,t)=\begin{pmatrix}
+I_{n-1} && 0 \\ \\ 
+D_{\xi} G(\xi,t) && D_t G(\xi,t).
+\end{pmatrix}
+\end{equation}
+Inoltre, derivando entrambi i termini di (b2) rispetto a $t$, si ha
+\begin{equation} \label{e:1=DtPhi}
+1 = D_t(F(\Phi(\xi,t)) = D_y F(\Phi(\xi,t))D_t G(\xi,t).
+\end{equation}
+Quindi da \eqref{e:DPhixt} e \eqref{e:1=DtPhi} si ottiene
+\begin{equation} \label{e:detDPhi}
+| \operatorname{det}D \Phi(\xi,t)|= |D_tG(\xi,t)|=\frac{1}{|(D_yF) \circ \Phi(\xi,t) |} > 0, \quad (\xi,t) \in V \times J.
+\end{equation}
+
+
+	Da (b4)  si ha che per ogni 
+$t \in J$ 
+\begin{equation} \label{e:Jalphatx}
+\sqrt{1 + \|D_\xi G(\xi,t))\|^2}  = 
+\sqrt{1 +
+ \frac{\| D_\xi F(\xi, G(\xi,t))\|^2}{|D_yF(\xi, G(\xi,t))|^2}} 
+= \frac{\|DF(\xi, G(\xi,t))\|}{|D_yF(\xi,G(\xi,t)|}, \quad \forall \xi \in V.
+\end{equation}
+Da \eqref{e:detDPhi} e \eqref{e:Jalphatx} deduciamo che 
+\begin{equation} \label{e:sqrtDG}
+\sqrt{1 + \|D_\xi G(\xi,t))\|^2} =\|DF\circ \Phi(\xi,t))\| | \operatorname{det}D \Phi(\xi,t)|\quad \forall (\xi,t)\in V\times J.\end{equation}
+
+
+
+Osserviamo ora che $\Phi$ è biettiva da $V \times J$ in $W$.
+Infatti, se $(\xi_1, t_1), (\xi_2, t_2) \in V \times J$ sono tali che $\Phi(\xi_1, t_1) = \Phi(\xi_2, t_2)$, per  definizione di $\Phi$ deve essere $\xi_1 = \xi_2$. 
+Posto $\xi:=\xi_1=\xi_2$ si ha  $G(\xi, t_1) = G(\xi, t_2)$ e quindi da (b2) segue che $t_1 = t_2$.
+Quindi, per il teorema di inversione locale,  essendo  $V \times J$ un insieme  aperto, anche  $W$ è aperto e  $\Phi$ è un diffeomorfismo da $V \times J$ in $W$.
+
+%(B)
+%{Mostriamo ora che per ogni $t \in J$, l'insieme $W$ è una carta locale su $M_t$ attorno al punto $(\xi_0, G(\xi_0, t))$ e la coppia $(V, \alpha_t)$ con
+
+%è un sistema di coordinate locali sulla carta locale $W$.
+
+Sia ora $t \in J$ e definiamo $\alpha_t: V\rightarrow W$, 
+\begin{equation} \label{e:defalphatx}
+\alpha_t(\xi) := \Phi(\xi,t)=(\xi,G(\xi,t)), \quad \xi \in V.
+\end{equation}
+Per (b3) $F(\alpha_t(\xi))=t$, allora    
+\[
+\alpha_t(V) = M_t \cap W.
+\]
+Inoltre, siccome $\alpha_t^{-1}(\xi,y) = \xi$ per ogni $(\xi,y) \in M_t \cap W$, allora
+\[
+\alpha_t^{-1}:M_t \cap W \rightarrow V
+\]
+è un omeomorfismo.
+
+Per \eqref{e:defalphatx} si ha
+\[
+D \alpha_t(\xi) = \left ( 
+\begin{array}{c}
+I_{n-1} \\ \\
+D_\xi G(\xi,t)
+\end{array} \right ) \qquad \forall \xi\in V
+\]
+quindi si ha
+\[
+\operatorname{rg}(D \alpha_t(\xi)) = n-1\qquad \forall \xi\in V.
+\]
+Questo dimostra che le coppie $(V, \alpha_t)$ sono un sistema di coordinate locali sulla carta $W$ attorno al punto $(\xi_0, G(\xi_0, t))$ di $M_t$ per ogni $t$.
+
+\medbreak
+
+Supponiamo ora che $\{ x \in \Omega \, : \, f(x) \neq 0 \} \subset K \subset W
+$ per un qualche compatto $K$.
+Per il teorema di cambiamento di variabili si ha
+\begin{equation} \label{e:intfDF}
+\int_{\Omega} f \|DF\| \; d x = \int_{W} f \|DF \| \; dx = \int_{V \times J} f \circ \Phi \  \| DF \circ \Phi \| |\operatorname{det} D\Phi|\, d x.
+\end{equation}
+
+La funzione $f \circ \Phi \| DF \circ \Phi \| |\operatorname{det} D\Phi|$ è misurabile per cui quasi ogni sua sezione lo è. Quindi la funzione
+\[
+\psi(t) := \int_{V} f \circ \Phi(\xi,t) \| DF \circ \Phi(\xi,t)\| |\operatorname{det}D\Phi(\xi,t)|d\xi
+\]
+è ben definita per q.o. $t \in J$. 
+Per il teorema di Tonelli, $\psi$ è misurabile e per \eqref{e:intfDF}
+\[
+\int_{\Omega} f \|DF\| \; dx = \int_{J} \psi(t) \; dt.
+\]
+Da \eqref{e:sqrtDG} si ha, per ogni $t\in J$ e per ogni $\xi \in V$ 
+\[
+\| DF \circ \Phi(\xi,t) \| |\operatorname{det}D\Phi(\xi,t)| = \sqrt{1 + \|D_\xi G(\xi,t))\|^2}, \]
+ pertanto  
+\begin{equation} \label{e:defpsicoarea}\psi(t) = \int_{V} f(\xi,G(\xi,t)) \sqrt{1 + \|D_\xi G(\xi,t))\|^2} d\xi, \quad \text{per q.o. } t \in J.
+\end{equation}
+
+Essendo il supporto di $f$ contenuto nel compatto  $K$,
+ $f \circ \Phi$ ha supporto contenuto in $\Phi^{-1}(K)$, che è un compatto di $V \times J$. Quindi anche $\psi$ risulta nulla al di fuori di un compatto di $J$.
+
+Da (b3), per ogni $t\in J$ è\[M_t\cap W=\{(\xi,y)\in W\,:\, F(\xi,y)=t\}=
+\{(\xi,G(\xi,t))\,:\, \xi\in V\}.\]
+Allora per  il teorema di cambiamento di variabili, si veda ad esempio il Teorema 9.1 in \cite{maggi} applicato a $u(\xi):=G(\xi,t)$,  e tenendo conto che il supporto di $f$ è contenuto in 
+$W$,  si ha 
+\[\int_{V} f(\xi,G(\xi,t)) \sqrt{1 + \|D_\xi G(\xi,t))\|^2} d\xi = \int_{M_t} f(\xi,y)\, d\sigma, \quad \text{per q.o. }t \in J,\]
+dove $\sigma$ denota la misura di Hausdorff $n-1$-dimensionale.
+Quindi, per \eqref{e:defpsicoarea},
+\begin{equation} \label{e:psimaggi}\psi(t)=  \int_{M_t} f(\xi,y)\, d\sigma, \quad \text{per q.o. } t \in J.\end{equation}
+Essendo  $\psi$  nulla al di fuori di un compatto di $J$, 
+possiamo prolungare $\psi$ con regolarità su $\mathbb{R}$  ponendo $\psi(t) = 0$ per $t \notin J$. 
+Così si ha
+\begin{equation}\label{e:3.20}
+\int_{\Omega} f \|DF\| \, dx = \int_{\mathbb{R}} \psi(t) \, dt.
+\end{equation}
+D'altra parte, avendo prolungato $\psi$, 
+la uguaglianza \eqref{e:psimaggi} continua a valere per $t\notin J$, 
+perché \[\{ x \in \Omega \, : \, f(x) \neq 0 \} \subset W\] e 
+\[W \cap M_t = \emptyset\qquad \forall t \notin J.\]
+Pertanto, da definizione di $\varphi$ si ha che $\psi = \varphi$ su $\mathbb{R}$, 
+e, da \eqref{e:3.20},
+\[\int_{\Omega} f \|DF\| \, dx = \int_{\mathbb{R}} \varphi(t) \, dt.
+\]
+
+
+Nel caso generale, sia $W := \{ W_z \}_{z \in \Omega}$ una collezione di intorni aperti dei punti di $\Omega$ scelta con la procedura appena descritta a meno di eventuali permutazioni di coordinate dovute al fatto che in generale si avrà solo $D_m F(z) \neq 0$ per qualche $m=m(z) \in \{ 1,...,n \}$ per ogni $z \in \Omega$. Sia quindi $\{ \eta_j \}_j$ una partizione dell'unità subordinata al ricoprimento $W$ di $\Omega$. Si ha allora:
+\[
+f = \sum_j f_j
+\]
+con $f_j = f\circ{\eta_j}$ e $\{ f_j \neq 0 \} \subset K_j \subset W_{z_j}$ per qualche insieme compatto $K_j$ e qualche punto $z_j \in \Omega$. Sia allora $\varphi_j$ la funzione misurabile associata a $f_j$, nella maniera descritta in precedenza. Proviamo che risulta
+\begin{equation} \label{e:phitsum}
+\varphi(t) = \sum_j \varphi_j(t), \quad t \in \mathbb{R}.
+\end{equation}
+Infatti, se $t \in \mathbb{R}$ è tale che $M_t \neq \emptyset$, allora per il Teorema di convergenza monotona si ha
+\[
+\varphi(t) = \int_{M_t} f d\sigma = \sum_j \int_{M_t} f_j d\sigma = \sum_j \varphi_j(t)
+\]
+mentre \eqref{e:phitsum} è ovvia se $M_t = \emptyset$. Infine, $\varphi$ è misurabile e si ha come prima per il teorema di convergenza monotona
+\[
+\int_{\Omega} f \| DF \| \; dx = \sum_j \int_{\Omega} f_j \| DF \| \; dx = \sum_j \int_{\mathbb{R}} \varphi_j \; dt = \int_{\mathbb{R}} \varphi \; dt.
+\]
+\end{proof}
+
+Il seguente risultato è la versione della formula di coarea senza l'ipotesi di segno sulla funzione $f$. Essa si può facilmente dimostrare 
+considerando che $f=f^+-f^-$, con $f^+$ e $f^-$ la parte positiva e negativa di $f$, rispettivamente.
+
+
+
+\begin{cor}\label{c:celadaC1.11}
+Siano $\Omega \subset \mathbb{R}^n$ aperto, $F \in C^{\infty}(\Omega)$ una funzione. Sia $N = F(C(F))$ l'insieme dei valori critici di F e
+
+\[
+M_t = \{x \in \Omega \, : \, F(x) = t \}, \quad t \in \mathbb{R}.
+\]
+Allora, per ogni $f:\Omega \rightarrow \mathbb{R}$ misurabile tale che
+\[
+\int_{\Omega} |f| \| DF \| \; dx < +\infty
+\]
+valgono le seguenti:
+
+(a) $f$ è $\sigma$-integrabile su $M_t$ per ogni $t \in F(\Omega) \setminus N$;
+
+(b) la funzione $\varphi:\mathbb{R} \rightarrow \mathbb{R}$ definita da
+\[ \varphi(t) = \left \{
+\begin{array} {ll}
+0 & \text{se } t \in (\mathbb{R} \setminus F(\Omega)) \cup N \\ \\
+\displaystyle \int_{M_t} f d\sigma & \text{se } t \in F(\Omega) \setminus N
+\end{array} \right.
+\]
+è misurabile e integrabile;
+
+(c) si ha $\displaystyle \int_{\Omega} f \| DF \| \; dx = \int_{\mathbb{R}} \varphi(t) dt.$
+\end{cor}
+
+Un'applicazione particolarmente significativa è la seguente.
+
+
+\begin{es}[Coordinate Sferiche] 
+\label{es:coordsferiche}
+Sia  $f\in L^1(\mathbb{R}^n)$. Allora 
+\begin{equation}\label{e:coareasferico}
+\int_{\mathbb{R}^n} f(x)\, dx =\int_{0}^{\infty}\left(\int_{\partial B(0,t)}f(x)\, d\sigma(x)
+\right)dt.
+\end{equation}
+Per dimostrarla, consideriamo la funzione  $$F:\mathbb{R}^n\setminus \{0\}\rightarrow \mathbb{R},\quad
+F(x)=|x|.$$ 
+Allora  $F\in C^\infty(\mathbb{R}^n\setminus \{0\})$ e 
+$|\nabla F(x)|=\left|\dfrac{x}{|x|}\right|=1$ per ogni $x\in\mathbb{R}^n\setminus \{0\}$. 
+Allora, per la formula di  coarea, vedi Corollario \ref{c:celadaC1.11}, 
+\begin{eqnarray*}
+\int_{\mathbb{R}^n} f(x)\, dx &=& \int_{\mathbb{R}^n\setminus \{0\}} f(x)\, dx=
+\int_{\mathbb{R}}\left( \int_{|x|=t}f(x)\, d\sigma(x)\right)dt \\ &=&
+\int_{0}^{\infty}\left(\int_{|x|=t}f(x)\, d\sigma(x)\right)dt.
+\end{eqnarray*}
+La formula \eqref{e:coareasferico} è così dimostrata. 
+
+Da questa uguaglianza, seguono facilmente le seguenti altre uguaglianze, valide per $r>0$:
+\begin{eqnarray}
+\int_{B(0,r)}f(x)\, dx=\int_{0}^{r}\left(\int_{\partial B(0,t)}f(x)\, d\sigma(x)
+\right)dt
+\end{eqnarray}
+e
+\begin{equation}
+\int_{\mathbb{R}^n\setminus B(0,r)}f(x)\, dx = 
+\int_{r}^{\infty}\left(\int_{\partial B(0,t)}f(x)\, d\sigma(x)\right)dt.
+\end{equation}
+\end{es}
+
+Una variante della precedente applicazione è relativa al caso delle funzioni radiali che qui sotto descriviamo.
+
+\begin{es}
+Sia $f\in L^1(\mathbb{R}^n)$ una funzione radiale, ossia   $f(x):=g(|x|)$ per una qualche  $g:[0,+\infty[\rightarrow\mathbb{R}$. 
+
+Allora,  ragionando come nell'Esempio \ref{es:coordsferiche}
+ e usando  il Corollario  \ref{c:celadaC1.11}, si ha \begin{eqnarray*}
+\int_{\mathbb{R}^n} f(x)\, dx &=&
+\int_{0}^{\infty}\left(\int_{\partial B(0,t)}g(|x|)\, d\sigma(x)\right)dt \\&=&
+\int_{0}^{\infty} g(t) \left(\int_{\partial B(0,t)}d\sigma (x)\right)dt,
+\end{eqnarray*}
+Ricordando che  \begin{eqnarray}\label{area}
+\mathrm{area}(\partial B_t(x_0))= n\omega_n t^{n-1},
+\end{eqnarray}
+otteniamo 
+\begin{eqnarray}
+\int_{\mathbb{R}^n} f(x)\, dx =
+n\omega_n \int_{0}^{\infty}g(t)t^{n-1}\, dt.
+\end{eqnarray}
+\end{es}
+%
+%
+%\tcr{Applicando il Corollario \ref{c:celadaC1.11} al caso $F:\mathbb{R}^n\setminus \{0\}\to \mathbb{R}$, $F(x) = |x|$ per $x \neq 0$, si ha 
+%\[
+%\int_{\mathbb{R}^n} f = \int_{0}^{+\infty} \left( \int_{ S_r } f(x) d\sigma(x)  \right) dr
+%\]
+%per ogni funzione $f: \mathbb{R}^n \rightarrow \mathbb{R}$ Borel misurabile ed integrabile.
+%
+%\end{es}
+%
+
+
+Un'altra conseguenza del Teorema \ref{t:celadaT1.10} è il seguente.
+
+\begin{cor}\label{c:celadaC1.13}
+Siano $\Omega \subset \mathbb{R}^n$ aperto ed $F \in C^\infty(\Omega)$ tale che ${F \le t}$ sia compatto per ogni $t \in \mathbb{R}$. Allora, per ogni $f \in C(\Omega)$ esiste $\psi \in C(\mathbb{R})$ tale che
+
+(a) $\psi = \varphi$ quasi ovunque, ove $\varphi : \mathbb{R} \rightarrow \mathbb{R}$ è la funzione 
+\[ \varphi(t) = \left \{
+\begin{array} {ll}
+0 & \text{se } t \in (\mathbb{R} \setminus F(\Omega)) \cup N \\ \\
+\displaystyle \int_{M_t} f d\sigma & \text{se } t \in F(\Omega) \setminus N
+\end{array} \right.
+\]
+
+(b) $\displaystyle \int_{-\infty}^t |\psi| < +\infty$;
+
+(c) $\displaystyle \int_{\{F < t\}} f \| DF \| \; dx= \int_{-\infty}^t \psi(s) \, ds$, per ogni $t \in \mathbb{R}$.
+\end{cor}
+
+\begin{proof}
+Possiamo supporre che $f \ge 0$.
+Applicando la formula di coarea a $f$ e $F$ sull'aperto $\{ F < t\}$ si ha
+\[
+\int_{\{F < t \}} f \| DF \| \; dx = \int_{-\infty}^t \left (\int_{ \{F = s\}} f(x) d\sigma(x) \right) ds = \int_{-\infty}^t \varphi(s) ds
+\]
+e siccome i sottolivelli di $F$ sono compatti si ha allora
+\[
+0 \le \int_{\{F < t\}} f \| DF \| \; dx < +\infty, \quad \forall \, t \in \mathbb{R}.
+\]
+Poniamo ora $\Omega' = \{ x \in \Omega \, : \, DF(x) \neq 0 \}$ e $M_t' = \{x \in \Omega \, : \, F(x) = t\}$ e denotiamo con
+\[
+\psi(t) = \left \{ \begin{array}{ll}
+0 & \text{se}\  t \notin F(\Omega') \\ \\
+\displaystyle \int_{M_t'} f d\sigma & \text{altrimenti}
+\end{array} \right.
+\]
+la funzione   misurabile tale che $\psi = \varphi$ costruita nel teorema precedente. Resta quindi da provare soltanto che $\psi \in C(\mathbb{R})$.
+
+Sia quindi $\{ \eta_j \}_{j \in J}$ una partizione dell'unità subordinata a un ricoprimento aperto $W = \{ W_x \}_{x \in \Omega'}$ costruito come nella dimostrazione del teorema precedente. Poniamo $f_i = f \circ {\eta_i}$ cosicché si ha $\{f_i \neq 0\} \subset K_i \subset W_i$ per qualche insieme compatto $K_i$ e qualche intorno aperto $W_i := W_{x_i}$ di qualche punto $x_i \in \Omega'$ e
+\[
+f = \sum_i f_i \quad \text{in $\Omega'$}.
+\]
+
+Sia inoltre
+\[
+\psi_i (t) = \int_{V_i} f_i \circ \alpha_{i,t} \ J\alpha_{i,t}, \quad t \in J_i = ]t_i - \epsilon_i, t_i + \epsilon_i[
+\]
+la funzione    misurabile associata a $f_i$, ove $(V_i, \alpha_{i,t})$ è un sistema di coordinate locali sulla carta locale $W_i$ di $M_t'$ attorno ad $x_i$ per ogni $t \in J_i$ ove $t_i = F(x_i)$ ed $\epsilon_i > 0$.
+
+Poiché $\{ f_i \neq 0\} \subset K_i$, si ha $\psi \in C_c(J_i)$. Si ha inoltre
+\[
+\psi(t) = \sum_i \psi_i(t), \quad t \in \mathbb{R},
+\]
+ed osserviamo che i supporti delle $\psi_i$ sono localmente finiti poiché, per ogni $t \in \mathbb{R}$ ed $\epsilon > 0$, si ha $\{ x \in \Omega' \, : \, t - \epsilon \le F(x) \le t + \epsilon \} \subset \{ x \in \Omega \, : \, t - \epsilon \le F(x) \le t + \epsilon \}$.
+Quindi, essendo $\{ x \in \Omega \, : \, t - \epsilon \le F(x) \le t + \epsilon \}$ compatto, esiste solo un numero finito di indici $i$ tali che $f_i$ sia non nulla su di esso. Conseguentemente, tutte le funzioni $\psi_i$ ad eccezione di un numero finito sono nulle sull'intervallo $]t - \epsilon, t + \epsilon[$ e quindi la serie è in effetti una somma finita attorno ad ogni punto e $\psi$ è continua.
+\end{proof}
+
+
+\begin{thebibliography}{90}      
+%\rhead[\fancyplain{}{\bfseries \leftmark}]{\fancyplain{}{\bfseries
+%\thepage}}
+\addcontentsline{toc}{chapter}{Bibliografia}
+% 
+% \bibitem{Dieudonne} J. Dieudonné, Foundations of modern analysis. {\em Pure and Applied Mathematics}, Vol. X Academic Press, New York-London 1960.
+
+
+
+\bibitem{celada} P. Celada:
+{\em Appunti di lezione}, Università di Parma. 
+
+
+\bibitem{flett} T.M. Flett:
+ {\em On transformations in $\mathbb{R}^n$ and a theorem of Sard}, 
+Amer. Math. Monthly 71 (1964), 623-629. 
+
+
+
+
+\bibitem{maggi} F. Maggi: Sets of finite perimeter and geometric variational problems. An introduction to geometric measure theory. {\em Cambridge Studies in Advanced Mathematics,} 135. Cambridge University Press, Cambridge, 2012.
+
+
+\bibitem{Milnor} J. Milnor: Singular Points of Complex Hypersurfaces. {\em Princeton University Press}, Princeton (1968).
+
+
+
+\bibitem{Moreira} C.G. Moreira, M.A.S.  Ruas:  
+{\em The curve selection lemma and the Morse-Sard theorem,} 
+Manuscripta Math. 129 (2009), no. 3, 401-408. 
+
+ 
+\bibitem{Morse} A.P. Morse, {\em The behavior of a function on its critical set,} Ann. of Math. (2) 40 (1939), no. 1, 62-70.
+
+
+ \bibitem{Narasimhan}  R. Narasimhan,  Lectures on topics in analysis. Notes by M. S. Rajwade. {\em Tata Institute of Fundamental Research Lectures on Mathematics}, No. 34 Tata Institute of Fundamental Research, Bombay 1965. 
+ 
+ 
+ 
+\bibitem{Saks} S. Saks,   Theory of the integral. Second revised edition English translation by L. C. Young With two additional notes by Stefan Banach. {\em  Dover Publications}, Inc., New York 1964.
+
+
+\bibitem{Sard} A. Sard, {\em The measure of the critical values of differentiable maps}, Bull. Amer. Math. Soc. 48 (1942), 883-890.
+
+
+\bibitem{Varberg} D.E. Varberg,
+{\em On differentiable transformations in $\mathbb{R}^n$,} 
+Amer. Math. Monthly 73 (1966), no. 4, part II, 111-114.
+
+
+\bibitem{Whitney} H. Whitney, {\em A function not constant on a connected set of critical points,}
+Duke Math. J. 1 (1935), no. 4, 514-517.
+\end{thebibliography}
+
+
+\end{document}
