@@ -1,33 +1,26 @@
 # Il teorema di Morse-Sard
 
 Un punto critico di una funzione $f:U \rightarrow \mathbb{R}^n$ di classe $C^k$,  $k\ge 1$,    con $U$ aperto di $\mathbb{R}^m$,  è un punto in cui   la matrice Jacobiana di $f$ non ha rango massimo. 
-Il Teorema di Morse-Sard afferma che l'immagine dei punti critici è un insieme di misura di Lebesgue $n$-dimensionale nulla se sussiste la seguente relazione tra $k$, $m$ e $n$: \[k\ge \max\{m-n+1,1\}.\] 
+Il Teorema di Morse-Sard afferma che l'immagine dei punti critici è un insieme di misura di Lebesgue $n$-dimensionale nulla se sussiste la seguente relazione tra $k$, $m$ e $n$: 
+```math
+ k\ge \max\{m-n+1,1\}.
+```
 
-Tale risultato è ottimale, come attestato da un controesempio di   H. Whitney \cite{Whitney}.
+Tale risultato è ottimale, come attestato da un controesempio di H. Whitney.
 
-\medbreak
+Il  Teorema di Morse-Sard è così chiamato, in quanto A.P. Morse nel  1939 pubblica la versione per funzioni a valori reali, successivamente  generalizzata da A. Sard   nel 1942, a funzioni a valori vettoriali; a tale risultato ci si riferisce spesso con la dicitura di $Lemma \  di \  Sard$.
 
+Vi sono due casi di particolare rilevanza: il caso  $m=n$, e il caso $n=1$. Nel primo caso, il Teorema di Morse-Sard può essere così enunciato:
 
+```math
+ Sia \ U \ un \  aperto \  di \ \mathbb{R}^n \  e \  sia \ f:U \rightarrow \mathbb{R}^n \  una \  funzione \  di \  classe \ C^1(U). \ Allora \  \mathcal{L}^n(f(crit(f)) = 0 \  dove 
+```
 
-
-
-Il  Teorema di Morse-Sard è così chiamato, in quanto A.P. Morse nel  1939 pubblica la versione per funzioni a valori reali in  \cite{Morse}, successivamente  generalizzata da A. Sard   nel 1942, a funzioni a valori vettoriali, vedi \cite{Sard}; a tale risultato ci si riferisce spesso con la dicitura di {\em Lemma di Sard}. 
-
-\medbreak
-
-
-
-Vi sono due casi di particolare rilevanza: il caso  $m=n$, e il caso $n=1$.
+```math
+crit(f) = \\{ x \in U \  : \  \det Df(x)=0 \\}.
+```
 
 
-\medbreak
-Nel primo caso, il Teorema di Morse-Sard può essere così enunciato:
-
-\medbreak
-{\em Sia $U$   un aperto di $\mathbb{R}^n$ e sia $f:U \rightarrow \mathbb{R}^n$ una funzione di classe $C^1(U)$.}
-
-{\em Allora ${\mathcal{L}^n}(f(crit(f)) = 0$ dove 
-\[crit(f) = \{ x \in U \, : \, \operatorname{det}Df(x)=0\}.\]}
 
 
 
