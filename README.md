@@ -7,7 +7,7 @@ Il Teorema di Morse-Sard afferma che l'immagine dei punti critici è un insieme 
 ```
 Tale risultato è ottimale, come attestato da un controesempio di H. Whitney.
 
-Il  Teorema di Morse-Sard è così chiamato, in quanto A.P. Morse nel  1939 pubblica la versione per funzioni a valori reali, successivamente  generalizzata da A. Sard   nel 1942, a funzioni a valori vettoriali; a tale risultato ci si riferisce spesso con la dicitura di $Lemma \  di \  Sard$.
+Il  Teorema di Morse-Sard è così chiamato, in quanto A.P. Morse nel  1939 pubblica la versione per funzioni a valori reali, successivamente  generalizzata da A. Sard   nel 1942, a funzioni a valori vettoriali; a tale risultato ci si riferisce spesso con la dicitura di Lemma di Sard.
 
 Vi sono due casi di particolare rilevanza: il caso  $m=n$, e il caso $n=1$. Nel primo caso, il Teorema di Morse-Sard può essere così enunciato:
 
@@ -21,7 +21,7 @@ $$crit(f) = \\{ x \in U \  : \  \nabla f(x)=0\\}.$$
 
 In particolare, da questo risultato si deduce che quasi ogni insieme  di livello di $f$ è una varietà di classe $C^m$. 
 
-Il capitolo centrale di questa tesi è il Capitolo 2, in cui diamo una dimostrazione del Teorema di Morse-Sard. Il caso $m<n$ non è difficile da trattare, ma decisamente più complicata è la trattazione del caso  $m\ge n$. Di questo caso, forniremo  la dimostrazione  di Moreira e Ruas pubblicata nel 2009, la quale fa uso del  cosiddetto $Curve \  selection \  Lemma$.
+Il capitolo centrale di questa tesi è il Capitolo 2, in cui diamo una dimostrazione del Teorema di Morse-Sard. Il caso $m<n$ non è difficile da trattare, ma decisamente più complicata è la trattazione del caso  $m\ge n$. Di questo caso, forniremo  la dimostrazione  di Moreira e Ruas pubblicata nel 2009, la quale fa uso del  cosiddetto Curve Selection Lemma.
 
 Nel caso $m=n$, l'ipotesi $f\in C^1$ richiesta dal Teorema di Morse-Sard non è ottimale. Infatti, D.E.  Varberg nel 1966 ndimostra che è possibile indebolire la regolarità di $f$ richiedendo la sola  differenziabilità. 
 Di tale teorema forniamo la dimostrazione originale di Varberg, la quale  poggia anche su risultati di Flett. Essa costituisce il terzo capitolo della tesi. 
